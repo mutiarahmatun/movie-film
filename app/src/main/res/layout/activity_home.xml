@@ -28,31 +28,6 @@
             app:logo="@drawable/logo_movie_film"/>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.synnapps.carouselview.CarouselView
-        android:id="@+id/carouselView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@android:color/white"
-        app:indicatorVisibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        app:layout_constraintVertical_bias="0.0"
-        app:slideInterval="5000" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:contentDescription="@string/image_preview"
-        android:src="@drawable/background_item"
-        app:layout_constraintBottom_toBottomOf="@+id/carouselView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/carouselView"
-        app:layout_constraintVertical_bias="0.353" />
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
@@ -61,7 +36,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carouselView"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:layout_constraintVertical_bias="0.0"
         app:tabIndicatorColor="@color/colorAccent"
         app:tabSelectedTextColor="@color/colorAccent"

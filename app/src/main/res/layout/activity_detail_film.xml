@@ -127,34 +127,4 @@
         app:layout_constraintTop_toBottomOf="@+id/textDescription"
         tools:text="@string/description" />
 
-    <TextView
-        android:id="@+id/textGenre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/genre"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/tv_description"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textDescription"
-        app:layout_constraintTop_toBottomOf="@+id/tv_description" />
-
-    <TextView
-        android:id="@+id/tv_genre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textGenre"
-        app:layout_constraintTop_toBottomOf="@+id/textGenre"
-        tools:text="@string/genre"
-        android:textAlignment="textStart"
-        android:textColor="@android:color/black"
-        android:textSize="14sp"
-        android:maxLines="2"/>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,10 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ShareCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.R
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.FilmAdapter
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmActivity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_MOVIE
@@ -17,6 +16,7 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.FilmViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.FragmentMovieBinding
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.FilmEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.FilmCallback
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
 
 class MovieFragment : Fragment(), FilmCallback {
 
@@ -33,27 +33,30 @@ class MovieFragment : Fragment(), FilmCallback {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        setRecycler()
+
+        val factory = ViewModelFactory.getInstance()
         activity?.let {
-            viewModelFilm = ViewModelProvider(it, ViewModelProvider.NewInstanceFactory())[FilmViewModel::class.java]
+            viewModelFilm = ViewModelProvider(
+                it,
+                factory
+            )[FilmViewModel::class.java]
         }
 
-        val listMovie = viewModelFilm.getListMovie()
-        setRecycler(listMovie)
+        viewModelFilm.getListNowPlayingMovies().observe(viewLifecycleOwner, Observer { listMovie ->
+            movieBinding.rvMovie.adapter?.let { adapter ->
+                when (adapter) {
+                    is FilmAdapter -> adapter.setData(listMovie)
+                }
+            }
+        })
+
     }
 
-    private fun setRecycler(data: List<FilmEntity>) {
-
+    private fun setRecycler() {
         movieBinding.rvMovie.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = FilmAdapter(this@MovieFragment)
-        }.also {
-            it.adapter.let { adapter ->
-                when (adapter) {
-                    is FilmAdapter -> {
-                        adapter.setData(data)
-                    }
-                }
-            }
         }
     }
 
