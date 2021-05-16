@@ -1,12 +1,14 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.FilmEntity
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.DataDummy
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.CatalogRepository
 
-class FilmViewModel : ViewModel() {
+class FilmViewModel (private val catalogRepository: CatalogRepository) : ViewModel() {
 
-    fun getListTvShow() : List<FilmEntity> = DataDummy.generateDummyTvShows()
+    fun getListNowPlayingMovies(): LiveData<List<FilmEntity>> = catalogRepository.getNowPlayingMovies()
 
-    fun getListMovie() : List<FilmEntity> = DataDummy.generateDummyMovies()
+    fun getListOnTheAirTvShows(): LiveData<List<FilmEntity>> = catalogRepository.getTvShowOnTheAir()
+
 }

@@ -3,7 +3,7 @@ package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.app.ShareCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.R
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_MOVIE
@@ -11,6 +11,10 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.setGlideImage
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.ActivityDetailFilmBinding
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.FilmEntity
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.API_IMAGE_ENDPOINT
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.ENDPOINT_POSTER_SIZE_W185
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.ENDPOINT_POSTER_SIZE_W780
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
 
 class DetailFilmActivity : AppCompatActivity() {
 
@@ -19,7 +23,6 @@ class DetailFilmActivity : AppCompatActivity() {
         const val EXTRA_TYPE = "extra_type"
     }
 
-    private lateinit var filmEntity: FilmEntity
     private lateinit var detailFilmBinding: ActivityDetailFilmBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,32 +30,36 @@ class DetailFilmActivity : AppCompatActivity() {
         detailFilmBinding = ActivityDetailFilmBinding.inflate(layoutInflater)
         setContentView(detailFilmBinding.root)
 
-        val viewModel = ViewModelProvider(this@DetailFilmActivity, ViewModelProvider.NewInstanceFactory())[DetailFilmViewModel::class.java]
+        val factory = ViewModelFactory.getInstance()
+        val viewModel = ViewModelProvider(
+            this@DetailFilmActivity,
+            factory
+        )[DetailFilmViewModel::class.java]
 
         supportActionBar?.title = "Detail Film"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val id = intent.getStringExtra(EXTRA_DATA)
+        val id = intent.getIntExtra(EXTRA_DATA, 0)
         val type = intent.getStringExtra(EXTRA_TYPE)
 
         if (type.equals(TYPE_MOVIE, ignoreCase = true)) {
-            id?.let {
-                viewModel.setMovieId(it)
-            }
-            filmEntity = viewModel.getDetailMovieById()
+            viewModel.getMovieDetail(id).observe(this, Observer {
+                displayData(it)
+            })
         } else if (type.equals(TYPE_TV_SHOW, ignoreCase = true)) {
-            id?.let {
-                viewModel.setTvShowId(it)
-            }
-            filmEntity = viewModel.getDetailTvShowById()
+            viewModel.getTvShowDetail(id).observe(this, Observer {
+                displayData(it)
+            })
         }
+    }
+
+    private fun displayData(filmEntity: FilmEntity) {
 
         detailFilmBinding.tvTitle.text = filmEntity.title
         detailFilmBinding.tvDescription.text = filmEntity.description
         detailFilmBinding.tvReleaseYear.text = filmEntity.releaseYear
-        detailFilmBinding.tvGenre.text = filmEntity.genre
-        setGlideImage(this@DetailFilmActivity, filmEntity.imgPoster, detailFilmBinding.imgItemPhoto)
-        setGlideImage(this@DetailFilmActivity, filmEntity.imgBackground, detailFilmBinding.imgItemPreview)
+        setGlideImage(this@DetailFilmActivity, API_IMAGE_ENDPOINT + ENDPOINT_POSTER_SIZE_W185 + filmEntity.imgPoster, detailFilmBinding.imgItemPhoto)
+        setGlideImage(this@DetailFilmActivity, API_IMAGE_ENDPOINT + ENDPOINT_POSTER_SIZE_W780 + filmEntity.imgBackground, detailFilmBinding.imgItemPreview)
 
         detailFilmBinding.imgShare.setOnClickListener{
             val intent= Intent()
@@ -61,6 +68,7 @@ class DetailFilmActivity : AppCompatActivity() {
             intent.type="text/plain"
             startActivity(Intent.createChooser(intent,"Share To:"))
         }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -7,9 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.ItemMovieFilmBinding
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.FilmEntity
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.API_IMAGE_ENDPOINT
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.ENDPOINT_POSTER_SIZE_W185
 import java.util.ArrayList
 
-class FilmAdapter (private val callback: FilmCallback) : RecyclerView.Adapter<FilmAdapter.ListViewHolder>() {
+class FilmAdapter (private val callback: FilmCallback) :
+    RecyclerView.Adapter<FilmAdapter.ListViewHolder>() {
 
     private val listFilmEntity = ArrayList<FilmEntity>()
 
@@ -17,6 +20,7 @@ class FilmAdapter (private val callback: FilmCallback) : RecyclerView.Adapter<Fi
         if (filmEntity == null) return
         listFilmEntity.clear()
         listFilmEntity.addAll(filmEntity)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -37,9 +41,11 @@ class FilmAdapter (private val callback: FilmCallback) : RecyclerView.Adapter<Fi
             with(viewBinding) {
                 tvTitle.text = filmEntity.title
 
-                Glide.with(itemView.context)
-                    .load(filmEntity.imgPoster)
-                    .into(imgItemPhoto)
+                filmEntity.imgPoster?.let {
+                    Glide.with(itemView.context)
+                            .load(API_IMAGE_ENDPOINT+ ENDPOINT_POSTER_SIZE_W185 + filmEntity.imgPoster)
+                            .into(imgItemPhoto)
+                }
 
                 itemView.setOnClickListener { callback?.onItemClicked(filmEntity) }
             }

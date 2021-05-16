@@ -1,224 +1,472 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.utils
 
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.R
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.FilmEntity
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.MovieResponse
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.TvShowResponse
 
 object DataDummy {
+    fun generateDataMovieDummyResponse(): List<MovieResponse> {
+        val listMovie = ArrayList<MovieResponse>()
 
-    fun generateDummyMovies(): ArrayList<FilmEntity> {
-        val movies = ArrayList<FilmEntity>()
-
-        movies.add(
-            FilmEntity(
-                "MOVIE_1",
-                "Alita: Battle Angle",
-                "Ketika Alita terbangun tanpa ingatan tentang siapa dia di dunia masa depan yang tidak dia kenal, dia ditangkap oleh Ido, seorang dokter yang penuh kasih yang menyadari bahwa di suatu tempat dalam cangkang cyborg yang ditinggalkan ini adalah hati dan jiwa seorang wanita muda dengan luar biasa.",
-                "Aksi, Cerita Fiksi, Petualangan",
-                "2019",
-                    R.drawable.poster_alita,
-                    R.drawable.latar_alita)
-        )
-
-        movies.add(
-            FilmEntity(
-                "MOVIE_2",
-                "Aquaman",
-                "Dulunya rumah bagi peradaban paling maju di Bumi, Atlantis sekarang menjadi kerajaan bawah air yang diperintah oleh Raja Orm yang haus kekuasaan. Dengan pasukan besar yang dimilikinya, Orm berencana untuk menaklukkan orang-orang samudra yang tersisa dan kemudian dunia permukaan. Yang menghalangi jalannya adalah Arthur Curry, saudara setengah manusia Orm, saudara setengah Atlantis dan pewaris sejati takhta.",
-                " Aksi, Petualangan, Fantasi",
-                "2018",
-                    R.drawable.poster_aquaman,
-                    R.drawable.latar_aquaman)
+        listMovie.add(
+                MovieResponse(
+                        1,
+                        "A Star Is Born",
+                        "Seasoned musician Jackson Maine discovers — and falls in love with — struggling artist Ally. She has just about given up on her dream to make it big as a singer — until Jack coaxes her into the spotlight. But even as Ally\\'s career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.",
+                        "2018",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg",
+                        "https://image.tmdb.org/t/p/original/wqtaHWOEZ3rXDJ8c6ZZShulbo18.jpg"
+                )
         )
 
-        movies.add(
-            FilmEntity(
-                "MOVIE_3",
-                "A Star Is Born",
-                "Seorang bintang musik country yang karirnya mulai memudar, Jackson Maine (Bradley Cooper) menemukan sebuah talenta yang sangat berbakat di dalam diri dari seorang musisi muda bernama Ally (Lady Gaga). Maine berhasil mengorbitkan Ally menjadi seorang bintang muda yang menjanjikan. Namun keduanya terlibat hubungan yang lebih jauh dari sekedar mentor dan anak didik. Seiring dengan meroketnya karir dari Ally dan dirinya, Maine mengalami dilema mengenai masalah ini.",
-                "Drama, Percintaan, Musik",
-                "2018",
-                    R.drawable.poster_a_start_is_born,
-                    R.drawable.latar_a_star)
+        listMovie.add(
+                MovieResponse(
+                        2,
+                        "Alita: Battle Angel",
+                        "When Alita awakens with no memory of who she is in a future world she does not recognize, she is taken in by Ido, a compassionate doctor who realizes that somewhere in this abandoned cyborg shell is the heart and soul of a young woman with an extraordinary past.",
+                        "2019",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/xRWht48C2V8XNfzvPehyClOvDni.jpg",
+                        "https://image.tmdb.org/t/p/original/aQXTw3wIWuFMy0beXRiZ1xVKtcf.jpg"
+                )
         )
 
-        movies.add(
-            FilmEntity(
-            "MOVIE_4",
-            "Bohemian Rhapsody",
-            "Singer Freddie Mercury, guitarist Brian May, drummer Roger Taylor and bass guitarist John Deacon take the music world by storm when they form the rock 'n' roll band Queen in 1970. Hit songs become instant classics. When Mercury's increasingly wild lifestyle starts to spiral out of control, Queen soon faces its greatest challenge yet – finding a way to keep the band together amid the success and excess.",
-            "Drama, Musik",
-            "2018",
-                    R.drawable.poster_bohemian,
-                    R.drawable.latar_bohemian)
+        listMovie.add(
+                MovieResponse(
+                        3,
+                        "Aquaman",
+                        "Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orm\\'s half-human, half-Atlantean brother and true heir to the throne.",
+                        "2018",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/5Kg76ldv7VxeX9YlcQXiowHgdX6.jpg",
+                        "https://image.tmdb.org/t/p/original/4IWnPqNu34zY4ku3LQJw56MIHFc.jpg"
+                )
         )
-        movies.add(
-            FilmEntity(
-            "MOVIE_5",
-            "Cold Pursuit",
-            "The quiet family life of Nels Coxman, a snowplow driver, is upended after his son's murder. Nels begins a vengeful hunt for Viking, the drug lord he holds responsible for the killing, eliminating Viking's associates one by one. As Nels draws closer to Viking, his actions bring even more unexpected and violent consequences, as he proves that revenge is all in the execution.",
-            "Aksi, Kejahatan, Cerita Seru",
-            "2019",
-                    R.drawable.poster_cold_persuit,
-                    R.drawable.latar_cold)
+
+        listMovie.add(
+                MovieResponse(
+                        4,
+                        "Bohemian Rhapsody",
+                        "Singer Freddie Mercury, guitarist Brian May, drummer Roger Taylor and bass guitarist John Deacon take the music world by storm when they form the rock \\'n\\' roll band Queen in 1970. Hit songs become instant classics. When Mercury\\'s increasingly wild lifestyle starts to spiral out of control, Queen soon faces its greatest challenge yet – finding a way to keep the band together amid the success and excess.",
+                        "2018",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg",
+                        "https://image.tmdb.org/t/p/original/xcaSYLBhmDzJ6P14bcKe0KTh3QV.jpgc"
+                )
         )
-        movies.add(
-            FilmEntity(
-            "MOVIE_6",
-            "How to Train Your Dragon: The Hidden World",
-            "Ketika Hiccup memenuhi mimpinya untuk menciptakan utopia naga yang damai, penemuan Toothless 'dari pasangan yang tak teruji dan sukar ditangkap membuat Night Fury menjauh. Ketika bahaya meningkat di rumah dan pemerintahan Hiccup sebagai kepala desa diuji, baik naga dan pengendara harus membuat keputusan yang mustahil untuk menyelamatkan jenis mereka.",
-            "Animasi, Keluarga, Petualangan",
-            "2019",
-                    R.drawable.poster_how_to_train,
-                    R.drawable.latar_how_to_train)
+
+        listMovie.add(
+                MovieResponse(
+                        5,
+                        "Cold Pursuit",
+                        "The quiet family life of Nels Coxman, a snowplow driver, is upended after his son\\'s murder. Nels begins a vengeful hunt for Viking, the drug lord he holds responsible for the killing, eliminating Viking\\'s associates one by one. As Nels draws closer to Viking, his actions bring even more unexpected and violent consequences, as he proves that revenge is all in the execution.",
+                        "2019",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/hXgmWPd1SuujRZ4QnKLzrj79PAw.jpg",
+                        "https://image.tmdb.org/t/p/original/XAvFHWmWjBeJUQEHBbCcXvzdDZ.jpg"
+                )
         )
-        movies.add(
-            FilmEntity(
-            "MOVIE_7",
-            "Avengers: Infinity War",
-            "Karena Avengers dan sekutunya terus melindungi dunia dari ancaman yang terlalu besar untuk ditangani oleh seorang pahlawan, bahaya baru telah muncul dari bayangan kosmik: Thanos. Seorang lalim penghujatan intergalaksi.",
-            "Petualangan, Aksi, Cerita Seru",
-            "2018",
-                    R.drawable.poster_infinity_war,
-                    R.drawable.latar_infinity)
+
+        listMovie.add(
+                MovieResponse(
+                        6,
+                        "Creed II",
+                        "Between personal obligations and training for his next big fight against an opponent with ties to his family\\'s past, Adonis Creed is up against the challenge of his life.",
+                        "2018",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg",
+                        "https://image.tmdb.org/t/p/original/7568G5PAdQweNfTiuwzlssOxueB.jpg"
+                )
         )
-        movies.add(
-            FilmEntity(
-            "MOVIE_8",
-            "Ralph Breaks the Internet",
-            "Video game bad guy Ralph and fellow misfit Vanellope von Schweetz must risk it all by traveling to the World Wide Web in search of a replacement part to save Vanellope's video game, Sugar Rush. In way over their heads, Ralph and Vanellope rely on the citizens of the internet — the netizens — to help navigate their way, including an entrepreneur named Yesss, who is the head algorithm and the heart and soul of trend-making site BuzzzTube.",
-            "Keluarga, Animasi, Komedi, Petualangan",
-            "2018",
-                    R.drawable.poster_ralph,
-                    R.drawable.latar_ralph)
+
+        listMovie.add(
+                MovieResponse(
+                        7,
+                        "Fantastic Beasts: The Crimes of Grindelwald",
+                        "Gellert Grindelwald has escaped imprisonment and has begun gathering followers to his cause—elevating wizards above all non-magical beings. The only one capable of putting a stop to him is the wizard he once called his closest friend, Albus Dumbledore. However, Dumbledore will need to seek help from the wizard who had thwarted Grindelwald once before, his former student Newt Scamander, who agrees to help, unaware of the dangers that lie ahead. Lines are drawn as love and loyalty are tested, even among the truest friends and family, in an increasingly divided wizarding world.",
+                        "2018",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/fMMrl8fD9gRCFJvsx0SuFwkEOop.jpg",
+                        "https://image.tmdb.org/t/p/original/heyvaoVLGC8lcB4FFoz65EBI8xF.jpg"
+                )
         )
-        movies.add(
-            FilmEntity(
-            "MOVIE_9",
-            "Robin Hood",
-            "A war-hardened Crusader and his Moorish commander mount an audacious revolt against the corrupt English crown.",
-            "Petualangan, Aksi, Cerita Seru",
-            "2018",
-                    R.drawable.poster_robin_hood,
-                    R.drawable.latar_robin)
+
+        listMovie.add(
+                MovieResponse(
+                        8,
+                        "Glass",
+                        "In a series of escalating encounters, former security guard David Dunn uses his supernatural abilities to track Kevin Wendell Crumb, a disturbed man who has twenty-four personalities. Meanwhile, the shadowy presence of Elijah Price emerges as an orchestrator who holds secrets critical to both men.",
+                        "2019",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg",
+                        "https://image.tmdb.org/t/p/original/ngBFDOsx13sFXiMweDoL54XYknR.jpg"
+                )
         )
-        movies.add(
-            FilmEntity(
-            "MOVIE_10",
-            "Spider-Main: Into the Spider-Verse",
-            "Miles Morales is juggling his life between being a high school student and being a spider-man. When Wilson \"Kingpin\" Fisk uses a super collider, others from across the Spider-Verse are transported to this dimension.",
-            "Aksi, Petualangan, Animasi",
-            "2018",
-                    R.drawable.poster_spiderman,
-                    R.drawable.latar_spider)
+
+        listMovie.add(
+                MovieResponse(
+                        9,
+                        "How to Train Your Dragon: The Hidden World",
+                        "As Hiccup fulfills his dream of creating a peaceful dragon utopia, Toothless’ discovery of an untamed, elusive mate draws the Night Fury away. When danger mounts at home and Hiccup’s reign as village chief is tested, both dragon and rider must make impossible decisions to save their kind.",
+                        "2019",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg",
+                        "https://image.tmdb.org/t/p/original/h3KN24PrOheHVYs9ypuOIdFBEpX.jpg"
+                )
         )
-        return movies
+
+        listMovie.add(
+                MovieResponse(
+                        10,
+                        "Avengers: Infinity War",
+                        "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain.",
+                        "2018",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+                        "https://image.tmdb.org/t/p/original/kbGO5mHPK7rh516MgAIJUQ9RvqD.jpg"
+                )
+        )
+
+        return listMovie
     }
 
-    fun generateDummyTvShows(): ArrayList<FilmEntity> {
-        val tvShows = ArrayList<FilmEntity>()
+    fun generateDataTvShowDummyResponse(): List<TvShowResponse> {
+        val listTvShow = ArrayList<TvShowResponse>()
 
-        tvShows.add(
-            FilmEntity(
-            "TVSHOW_1",
-            "The Arrow",
-            "Panah adalah menceritakan kembali petualangan dari legendaris DC pahlawan Green Arrow",
-            "Kejahatan, Drama, Misteri",
-            "2012",
-                    R.drawable.poster_arrow,
-                    R.drawable.latar_arrow)
-        )
-        tvShows.add(
-            FilmEntity(
-            "TVSHOW_2",
-            "Dragon Ball Absalon",
-            "The series begins twelve years after Goku is seen leaving on Shenron not at the end of Dragon Ball GT, and diverges entirely into its own plot from there, on an alternate timeline from the one which shows Goku Jr. fighting Vegeta Jr. at the World Martial Arts Tournament. In this series, Majuub has reached new levels of power, and has honed the techniques taught to him by Goku. We also see Gotenks finally mature, and Vegeta more powerful than ever.Each character will bring forth their own set of capabilities and purpose, winning fights and being relevant, in order to create an environment that emphasizes teamwork as well as individual worth for each character. In this series, the main set of villains are Saiyans, with abilities highly similar to the Saiyans that we are familiar with. These new Saiyans are more powerful than any threat the Z Fighters have ever faced, but after twelve years of intensive training, our heroes will not be easily defeated .",
-            "Sci-fi & Fantasy, Aksi & Petualangan",
-            "2012",
-                    R.drawable.poster_dragon_ball,
-                    R.drawable.latar_dragon)
-        )
-        tvShows.add(
-            FilmEntity(
-            "TVSHOW_3",
-            "Family Guy",
-            "Seri animasi animasi Freakin 'Sweet yang sakit, terpelintir, dan salah, menampilkan petualangan keluarga Griffin yang disfungsional. Peter yang kikuk dan Lois yang sudah lama menderita memiliki tiga anak. Stewie (bayi yang brilian tetapi sadis yang bertekad membunuh ibunya dan mengambil alih dunia), Meg (yang tertua, dan merupakan gadis yang paling tidak populer di kota) dan Chris (anak tengah, dia tidak terlalu cerdas tetapi memiliki hasrat untuk film ).",
-            "Animasi, Komedi",
-            "1999",
-                    R.drawable.poster_family_guy,
-                    R.drawable.latar_family)
-        )
-        tvShows.add(
-            FilmEntity(
-            "TVSHOW_4",
-            "The Flash",
-            "Setelah akselerator partikel menyebabkan badai aneh, Penyelidik CSI Barry Allen disambar petir dan jatuh koma. Beberapa bulan kemudian dia terbangun dengan kekuatan kecepatan super, memberinya kemampuan untuk bergerak melalui Central City seperti malaikat penjaga yang tak terlihat. Untuk saat ini, hanya beberapa teman dekat dan rekan yang tahu bahwa Barry secara harfiah adalah manusia tercepat, tetapi tidak lama sebelum dunia mengetahui apa yang menjadi Barry Allen ... The Flash.",
-            "Drama, Sci-fi & Fantasy",
-            "2014",
-                    R.drawable.poster_flash,
-                    R.drawable.latar_flash)
-        )
-        tvShows.add(
-            FilmEntity(
-            "TVSHOW_5",
-            "Gotham",
-            "Semua orang tahu nama Komisaris Gordon. Dia adalah salah satu musuh terbesar dunia kejahatan, seorang pria yang reputasinya identik dengan hukum dan ketertiban. Tapi apa yang diketahui tentang kisah Gordon dan kenaikannya dari detektif pemula ke Komisaris Polisi? Apa yang diperlukan untuk menavigasi berbagai lapisan korupsi yang diam-diam memerintah Kota Gotham, tempat bertelurnya penjahat paling ikonik di dunia? Dan keadaan apa yang menciptakan mereka.",
-            "Drama, Fantasi, Kejahatan",
-            "2014",
-                    R.drawable.poster_gotham,
-                    R.drawable.latar_gotham)
-        )
-        tvShows.add(
-            FilmEntity(
-            "TVSHOW_6",
-            "Grey's Anatomy",
-            "Ikuti kehidupan pribadi dan profesional sekelompok dokter di Rumah Sakit Gray Sloan Memorial di Seattle.",
-            "Drama",
-            "2005",
-                    R.drawable.poster_grey_anatomy,
-                    R.drawable.latar_grey)
-        )
-        tvShows.add(
-            FilmEntity(
-            "TVSHOW_7",
-            "Hanna",
-            "This thriller and coming-of-age drama follows the journey of an extraordinary young girl as she evades the relentless pursuit of an off-book CIA agent and tries to unearth the truth behind who she is. Based on the 2011 Joe Wright film.",
-            "Aksi & Petualangan, Drama",
-            "2019",
-                    R.drawable.poster_hanna,
-                    R.drawable.latar_hanna)
-        )
-        tvShows.add(
-            FilmEntity(
-            "TVSHOW_8",
-            "Naruto Shippuden",
-            "Naruto Shippuuden adalah kelanjutan dari serial TV animasi asli Naruto. Kisah ini berkisah tentang Uzumaki Naruto yang lebih tua dan sedikit lebih matang dan upayanya untuk menyelamatkan temannya Uchiha Sasuke dari cengkeraman Shinobi seperti ular, Orochimaru. Setelah 2 setengah tahun, Naruto akhirnya kembali ke desanya Konoha, dan mulai mewujudkan ambisinya, meskipun itu tidak akan mudah, karena Ia telah mengumpulkan beberapa musuh (lebih berbahaya), seperti organisasi shinobi. ; Akatsuki.",
-            "Animasi, Komedi, Drama",
-            "2007",
-                    R.drawable.poster_naruto_shipudden,
-                    R.drawable.latar_naruto)
-        )
-        tvShows.add(
-            FilmEntity(
-            "TVSHOW_9",
-            "NCIS",
-            "From murder and espionage to terrorism and stolen submarines, a team of special agents investigates any crime that has a shred of evidence connected to Navy and Marine Corps personnel, regardless of rank or position.",
-            "Aksi & Petualangan, Kejahatan, Drama",
-            "2003",
-                    R.drawable.poster_ncis,
-                    R.drawable.latar_ncis)
-        )
-        tvShows.add(
-            FilmEntity(
-            "TVSHOW_10",
-            "The Simpsons",
-            "Bertempat di Springfield, kota rata-rata di Amerika, pertunjukan ini berfokus pada kejenakaan dan petualangan sehari-hari keluarga Simpson; Homer, Marge, Bart, Lisa dan Maggie, serta ribuan pemain virtual. Sejak awal, serial ini telah menjadi ikon budaya pop, menarik ratusan selebriti menjadi bintang tamu. Acara ini juga menjadi terkenal karena satirnya yang tak kenal takut terhadap kehidupan politik, media, dan Amerika secara umum.",
-            "Animasi, Komedi, Keluarga, Drama",
-            "1989",
-                    R.drawable.poster_the_simpson,
-                    R.drawable.latar_simpsons)
+        listTvShow.add(
+                TvShowResponse(
+                        11,
+                        "Arrow",
+                        "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow.",
+                        "2012",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg",
+                        "https://image.tmdb.org/t/p/original/elbLQbocvW9vwrHRjYTSjXr5BX5.jpg"
+                )
         )
 
-        return tvShows
+        listTvShow.add(
+                TvShowResponse(
+                        12,
+                        "Doom Patrol",
+                        "The Doom Patrol’s members each suffered horrible accidents that gave them superhuman abilities — but also left them scarred and disfigured. Traumatized and downtrodden, the team found purpose through The Chief, who brought them together to investigate the weirdest phenomena in existence — and to protect Earth from what they find.",
+                        "2019",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/nVN7Dt0Xr78gnJepRsRLaLYklbY.jpg",
+                        "https://image.tmdb.org/t/p/original/sAzw6I1G9JUxm86KokIDdQeWtaq.jpg"
+                )
+        )
+
+        listTvShow.add(
+                TvShowResponse(
+                        13,
+                        "Dragon Ball",
+                        "Long ago in the mountains, a fighting master known as Gohan discovered a strange boy whom he named Goku. Gohan raised him and trained Goku in martial arts until he died. The young and very strong boy was on his own, but easily managed. Then one day, Goku met a teenage girl named Bulma, whose search for the mystical Dragon Balls brought her to Goku\\'s home. Together, they set off to find all seven and to grant her wish.",
+                        "2012",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/3wx3EAMtqnbSLhGG8NrqXriCUIQ.jpg",
+                        "https://image.tmdb.org/t/p/original/igXpePfyVeuG50rvSVEay2u4I3R.jpg"
+                )
+        )
+
+        listTvShow.add(
+                TvShowResponse(
+                        14,
+                        "Fairy Tail",
+                        "Lucy is a 17-year-old girl, who wants to be a full-fledged mage. One day when visiting Harujion Town, she meets Natsu, a young man who gets sick easily by any type of transportation. But Natsu isn\\'t just any ordinary kid, he\\'s a member of one of the world\\'s most infamous mage guilds: Fairy Tail.",
+                        "2009",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/lV07a5UwE75jVVuFN1GFEscN7if.jpg",
+                        "https://image.tmdb.org/t/p/original/fANxNeH9JCXPrzNEfriGu1Y95dF.jpg"
+                )
+        )
+
+        listTvShow.add(
+                TvShowResponse(
+                        15,
+                        "Family Guy",
+                        "Sick, twisted, politically incorrect and Freakin\\' Sweet animated series featuring the adventures of the dysfunctional Griffin family. Bumbling Peter and long-suffering Lois have three kids. Stewie (a brilliant but sadistic baby bent on killing his mother and taking over the world), Meg (the oldest, and is the most unpopular girl in town) and Chris (the middle kid, he\\'s not very bright but has a passion for movies). The final member of the family is Brian - a talking dog and much more than a pet, he keeps Stewie in check whilst sipping Martinis and sorting through his own life issues.",
+                        "1999",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/xtIFsv0Wpy29Bw7i8gUm1L9x6x8.jpg",
+                        "https://image.tmdb.org/t/p/original/hnK5vODlS1OIIF3Sw6T0RQyt0K3.jpg"
+                )
+        )
+
+        listTvShow.add(
+                TvShowResponse(
+                        16,
+                        "The Flash",
+                        "After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only \"meta-human\" who was created in the wake of the accelerator explosion — and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won\\'t be long before the world learns what Barry Allen has become…The Flash.",
+                        "2014",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/wHa6KOJAoNTFLFtp7wguUJKSnju.jpg",
+                        "https://image.tmdb.org/t/p/original/rkRqvadAVWzdnrS6bdcUAyJtfpy.jpg"
+                )
+        )
+
+        listTvShow.add(
+                TvShowResponse(
+                        17,
+                        "Game of Thrones",
+                        "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night\\'s Watch, is all that stands between the realms of men and icy horrors beyond.",
+                        "2011",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
+                        "https://image.tmdb.org/t/p/original/xM8zPWNqwbgCZQNgOOH2YeM7Cu.jpg"
+                )
+        )
+
+        listTvShow.add(
+                TvShowResponse(
+                        18,
+                        "Gotham",
+                        "Everyone knows the name Commissioner Gordon. He is one of the crime world\\'s greatest foes, a man whose reputation is synonymous with law and order. But what is known of Gordon\\'s story and his rise from rookie detective to Police Commissioner? What did it take to navigate the multiple layers of corruption that secretly ruled Gotham City, the spawning ground of the world\\'s most iconic villains? And what circumstances created them – the larger-than-life personas who would become Catwoman, The Penguin, The Riddler, Two-Face and The Joker?",
+                        "2014",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/4XddcRDtnNjYmLRMYpbrhFxsbuq.jpg",
+                        "https://image.tmdb.org/t/p/original/l0U4mNs2vp65AAbfH8v2ymij8T5.jpg"
+                )
+        )
+
+        listTvShow.add(
+                TvShowResponse(
+                        19,
+                        "Grey's Anatomy",
+                        "Follows the personal and professional lives of a group of doctors at Seattle’s Grey Sloan Memorial Hospital.",
+                        "2005",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/jnsvc7gCKocXnrTXF6p03cICTWb.jpg",
+                        "https://image.tmdb.org/t/p/original/ym20NYY99jNH0OzSg4TgLLGsQF9.jpg"
+                )
+        )
+
+        listTvShow.add(
+                TvShowResponse(
+                        20,
+                        "Hanna",
+                        "This thriller and coming-of-age drama follows the journey of an extraordinary young girl as she evades the relentless pursuit of an off-book CIA agent and tries to unearth the truth behind who she is. Based on the 2011 Joe Wright film.",
+                        "2019",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/5nSSkcM3TgpllZ7yTyBOQEgAX36.jpg",
+                        "https://image.tmdb.org/t/p/original/ofjZbud67zO2wxQ48VgMVnkECQu.jpg"
+                )
+        )
+
+        return listTvShow
     }
 
+
+    fun generateDataMovieDummy(): List<FilmEntity> {
+        val listMovie = ArrayList<FilmEntity>()
+
+        listMovie.add(
+                FilmEntity(
+                        1,
+                        "A Star Is Born",
+                        "Seasoned musician Jackson Maine discovers — and falls in love with — struggling artist Ally. She has just about given up on her dream to make it big as a singer — until Jack coaxes her into the spotlight. But even as Ally\\'s career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.",
+                        "2018",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg",
+                        "https://image.tmdb.org/t/p/original/wqtaHWOEZ3rXDJ8c6ZZShulbo18.jpg"
+                )
+        )
+
+        listMovie.add(
+                FilmEntity(
+                        2,
+                        "Alita: Battle Angel",
+                        "When Alita awakens with no memory of who she is in a future world she does not recognize, she is taken in by Ido, a compassionate doctor who realizes that somewhere in this abandoned cyborg shell is the heart and soul of a young woman with an extraordinary past.",
+                        "2019",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/xRWht48C2V8XNfzvPehyClOvDni.jpg",
+                        "https://image.tmdb.org/t/p/original/aQXTw3wIWuFMy0beXRiZ1xVKtcf.jpg"
+                )
+        )
+
+        listMovie.add(
+                FilmEntity(
+                        3,
+                        "Aquaman",
+                        "Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orm\\'s half-human, half-Atlantean brother and true heir to the throne.",
+                        "2018",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/5Kg76ldv7VxeX9YlcQXiowHgdX6.jpg",
+                        "https://image.tmdb.org/t/p/original/4IWnPqNu34zY4ku3LQJw56MIHFc.jpg"
+                )
+        )
+
+        listMovie.add(
+                FilmEntity(
+                        4,
+                        "Bohemian Rhapsody",
+                        "Singer Freddie Mercury, guitarist Brian May, drummer Roger Taylor and bass guitarist John Deacon take the music world by storm when they form the rock \\'n\\' roll band Queen in 1970. Hit songs become instant classics. When Mercury\\'s increasingly wild lifestyle starts to spiral out of control, Queen soon faces its greatest challenge yet – finding a way to keep the band together amid the success and excess.",
+                        "2018",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg",
+                        "https://image.tmdb.org/t/p/original/xcaSYLBhmDzJ6P14bcKe0KTh3QV.jpgc"
+                )
+        )
+
+        listMovie.add(
+                FilmEntity(
+                        5,
+                        "Cold Pursuit",
+                        "The quiet family life of Nels Coxman, a snowplow driver, is upended after his son\\'s murder. Nels begins a vengeful hunt for Viking, the drug lord he holds responsible for the killing, eliminating Viking\\'s associates one by one. As Nels draws closer to Viking, his actions bring even more unexpected and violent consequences, as he proves that revenge is all in the execution.",
+                        "2019",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/hXgmWPd1SuujRZ4QnKLzrj79PAw.jpg",
+                        "https://image.tmdb.org/t/p/original/XAvFHWmWjBeJUQEHBbCcXvzdDZ.jpg"
+                )
+        )
+
+        listMovie.add(
+                FilmEntity(
+                        6,
+                        "Creed II",
+                        "Between personal obligations and training for his next big fight against an opponent with ties to his family\\'s past, Adonis Creed is up against the challenge of his life.",
+                        "2018",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg",
+                        "https://image.tmdb.org/t/p/original/7568G5PAdQweNfTiuwzlssOxueB.jpg"
+                )
+        )
+
+        listMovie.add(
+                FilmEntity(
+                        7,
+                        "Fantastic Beasts: The Crimes of Grindelwald",
+                        "Gellert Grindelwald has escaped imprisonment and has begun gathering followers to his cause—elevating wizards above all non-magical beings. The only one capable of putting a stop to him is the wizard he once called his closest friend, Albus Dumbledore. However, Dumbledore will need to seek help from the wizard who had thwarted Grindelwald once before, his former student Newt Scamander, who agrees to help, unaware of the dangers that lie ahead. Lines are drawn as love and loyalty are tested, even among the truest friends and family, in an increasingly divided wizarding world.",
+                        "2018",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/fMMrl8fD9gRCFJvsx0SuFwkEOop.jpg",
+                        "https://image.tmdb.org/t/p/original/heyvaoVLGC8lcB4FFoz65EBI8xF.jpg"
+                )
+        )
+
+        listMovie.add(
+                FilmEntity(
+                        8,
+                        "Glass",
+                        "In a series of escalating encounters, former security guard David Dunn uses his supernatural abilities to track Kevin Wendell Crumb, a disturbed man who has twenty-four personalities. Meanwhile, the shadowy presence of Elijah Price emerges as an orchestrator who holds secrets critical to both men.",
+                        "2019",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg",
+                        "https://image.tmdb.org/t/p/original/ngBFDOsx13sFXiMweDoL54XYknR.jpg"
+                )
+        )
+
+        listMovie.add(
+                FilmEntity(
+                        9,
+                        "How to Train Your Dragon: The Hidden World",
+                        "As Hiccup fulfills his dream of creating a peaceful dragon utopia, Toothless’ discovery of an untamed, elusive mate draws the Night Fury away. When danger mounts at home and Hiccup’s reign as village chief is tested, both dragon and rider must make impossible decisions to save their kind.",
+                        "2019",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg",
+                        "https://image.tmdb.org/t/p/original/h3KN24PrOheHVYs9ypuOIdFBEpX.jpg"
+                )
+        )
+
+        listMovie.add(
+                FilmEntity(
+                        10,
+                        "Avengers: Infinity War",
+                        "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain.",
+                        "2018",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+                        "https://image.tmdb.org/t/p/original/kbGO5mHPK7rh516MgAIJUQ9RvqD.jpg"
+                )
+        )
+
+        return listMovie
+    }
+
+    fun generateDataTvShowDummy(): List<FilmEntity> {
+        val listTvShow = ArrayList<FilmEntity>()
+
+        listTvShow.add(
+                FilmEntity(
+                        11,
+                        "Arrow",
+                        "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow.",
+                        "2012",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg",
+                        "https://image.tmdb.org/t/p/original/elbLQbocvW9vwrHRjYTSjXr5BX5.jpg"
+                )
+        )
+
+        listTvShow.add(
+                FilmEntity(
+                        12,
+                        "Doom Patrol",
+                        "The Doom Patrol’s members each suffered horrible accidents that gave them superhuman abilities — but also left them scarred and disfigured. Traumatized and downtrodden, the team found purpose through The Chief, who brought them together to investigate the weirdest phenomena in existence — and to protect Earth from what they find.",
+                        "2019",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/nVN7Dt0Xr78gnJepRsRLaLYklbY.jpg",
+                        "https://image.tmdb.org/t/p/original/sAzw6I1G9JUxm86KokIDdQeWtaq.jpg"
+                )
+        )
+
+        listTvShow.add(
+                FilmEntity(
+                        13,
+                        "Dragon Ball",
+                        "Long ago in the mountains, a fighting master known as Gohan discovered a strange boy whom he named Goku. Gohan raised him and trained Goku in martial arts until he died. The young and very strong boy was on his own, but easily managed. Then one day, Goku met a teenage girl named Bulma, whose search for the mystical Dragon Balls brought her to Goku\\'s home. Together, they set off to find all seven and to grant her wish.",
+                        "2012",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/3wx3EAMtqnbSLhGG8NrqXriCUIQ.jpg",
+                        "https://image.tmdb.org/t/p/original/igXpePfyVeuG50rvSVEay2u4I3R.jpg"
+                )
+        )
+
+        listTvShow.add(
+                FilmEntity(
+                        14,
+                        "Fairy Tail",
+                        "Lucy is a 17-year-old girl, who wants to be a full-fledged mage. One day when visiting Harujion Town, she meets Natsu, a young man who gets sick easily by any type of transportation. But Natsu isn\\'t just any ordinary kid, he\\'s a member of one of the world\\'s most infamous mage guilds: Fairy Tail.",
+                        "2009",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/lV07a5UwE75jVVuFN1GFEscN7if.jpg",
+                        "https://image.tmdb.org/t/p/original/fANxNeH9JCXPrzNEfriGu1Y95dF.jpg"
+                )
+        )
+
+        listTvShow.add(
+                FilmEntity(
+                        15,
+                        "Family Guy",
+                        "Sick, twisted, politically incorrect and Freakin\\' Sweet animated series featuring the adventures of the dysfunctional Griffin family. Bumbling Peter and long-suffering Lois have three kids. Stewie (a brilliant but sadistic baby bent on killing his mother and taking over the world), Meg (the oldest, and is the most unpopular girl in town) and Chris (the middle kid, he\\'s not very bright but has a passion for movies). The final member of the family is Brian - a talking dog and much more than a pet, he keeps Stewie in check whilst sipping Martinis and sorting through his own life issues.",
+                        "1999",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/xtIFsv0Wpy29Bw7i8gUm1L9x6x8.jpg",
+                        "https://image.tmdb.org/t/p/original/hnK5vODlS1OIIF3Sw6T0RQyt0K3.jpg"
+                )
+        )
+
+        listTvShow.add(
+                FilmEntity(
+                        16,
+                        "The Flash",
+                        "After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only \"meta-human\" who was created in the wake of the accelerator explosion — and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won\\'t be long before the world learns what Barry Allen has become…The Flash.",
+                        "2014",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/wHa6KOJAoNTFLFtp7wguUJKSnju.jpg",
+                        "https://image.tmdb.org/t/p/original/rkRqvadAVWzdnrS6bdcUAyJtfpy.jpg"
+                )
+        )
+
+        listTvShow.add(
+                FilmEntity(
+                        17,
+                        "Game of Thrones",
+                        "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night\\'s Watch, is all that stands between the realms of men and icy horrors beyond.",
+                        "2011",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
+                        "https://image.tmdb.org/t/p/original/xM8zPWNqwbgCZQNgOOH2YeM7Cu.jpg"
+                )
+        )
+
+        listTvShow.add(
+                FilmEntity(
+                        18,
+                        "Gotham",
+                        "Everyone knows the name Commissioner Gordon. He is one of the crime world\\'s greatest foes, a man whose reputation is synonymous with law and order. But what is known of Gordon\\'s story and his rise from rookie detective to Police Commissioner? What did it take to navigate the multiple layers of corruption that secretly ruled Gotham City, the spawning ground of the world\\'s most iconic villains? And what circumstances created them – the larger-than-life personas who would become Catwoman, The Penguin, The Riddler, Two-Face and The Joker?",
+                        "2014",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/4XddcRDtnNjYmLRMYpbrhFxsbuq.jpg",
+                        "https://image.tmdb.org/t/p/original/l0U4mNs2vp65AAbfH8v2ymij8T5.jpg"
+                )
+        )
+
+        listTvShow.add(
+                FilmEntity(
+                        19,
+                        "Grey's Anatomy",
+                        "Follows the personal and professional lives of a group of doctors at Seattle’s Grey Sloan Memorial Hospital.",
+                        "2005",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/jnsvc7gCKocXnrTXF6p03cICTWb.jpg",
+                        "https://image.tmdb.org/t/p/original/ym20NYY99jNH0OzSg4TgLLGsQF9.jpg"
+                )
+        )
+
+        listTvShow.add(
+                FilmEntity(
+                        20,
+                        "Hanna",
+                        "This thriller and coming-of-age drama follows the journey of an extraordinary young girl as she evades the relentless pursuit of an off-book CIA agent and tries to unearth the truth behind who she is. Based on the 2011 Joe Wright film.",
+                        "2019",
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/5nSSkcM3TgpllZ7yTyBOQEgAX36.jpg",
+                        "https://image.tmdb.org/t/p/original/ofjZbud67zO2wxQ48VgMVnkECQu.jpg"
+                )
+        )
+
+        return listTvShow
+    }
 }
