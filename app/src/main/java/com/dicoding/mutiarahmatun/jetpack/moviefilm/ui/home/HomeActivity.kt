@@ -21,6 +21,9 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.carouselView.pageCount = carouselImages.size
+        binding.carouselView.setImageListener(imageListener)
+
         val factory = ViewModelFactory.getInstance()
         viewModel = ViewModelProvider(
             this@HomeActivity,
@@ -34,5 +37,18 @@ class HomeActivity : AppCompatActivity() {
         val sectionPagerAdapter = SectionPagerAdapter(this, supportFragmentManager)
         binding.viewPager.adapter = sectionPagerAdapter
         binding.tabs.setupWithViewPager(binding.viewPager)
+    }
+
+    private val carouselImages = intArrayOf(
+            R.drawable.latar_a_star,
+            R.drawable.latar_alita,
+            R.drawable.latar_simpsons,
+            R.drawable.latar_spider,
+            R.drawable.latar_bohemian,
+            R.drawable.latar_gotham
+    )
+
+    private val imageListener = ImageListener { position, imageView ->
+        imageView.setImageResource(carouselImages[position])
     }
 }
