@@ -6,9 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    private val httpClient = OkHttpClient.Builder().apply {
-
-    }.build()
+    private val httpClient = OkHttpClient()
 
 
     private val retrofit: Retrofit.Builder by lazy {
