@@ -1,19 +1,18 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.R
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_MOVIE
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_TV_SHOW
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.setGlideImage
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.ActivityDetailFilmBinding
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.FilmEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.API_IMAGE_ENDPOINT
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.ENDPOINT_POSTER_SIZE_W185
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.ENDPOINT_POSTER_SIZE_W780
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_MOVIE
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_TV_SHOW
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.setGlideImage
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
 
 class DetailFilmActivity : AppCompatActivity() {

@@ -1,7 +1,6 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source
 
 import androidx.lifecycle.LiveData
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.FilmEntity
 
 interface CatalogDataSource {
 

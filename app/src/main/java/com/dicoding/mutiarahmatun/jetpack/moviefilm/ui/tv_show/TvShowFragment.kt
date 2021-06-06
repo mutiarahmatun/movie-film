@@ -2,20 +2,19 @@ package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.tv_show
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_TV_SHOW
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmActivity
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.FilmEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.FragmentTvShowBinding
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.FilmAdapter
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.FilmCallback
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.FilmViewModel
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmActivity
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_TV_SHOW
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
 
 class TvShowFragment : Fragment(), FilmCallback {

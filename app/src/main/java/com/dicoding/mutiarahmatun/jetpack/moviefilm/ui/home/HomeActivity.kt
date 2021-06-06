@@ -1,15 +1,11 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.R
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.ActivityHomeBinding
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.FilmViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
-import com.google.android.material.tabs.TabLayoutMediator
-import com.synnapps.carouselview.ImageListener
 
 class HomeActivity : AppCompatActivity() {
 

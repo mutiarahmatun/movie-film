@@ -2,7 +2,6 @@ package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.FilmEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.CatalogRepository
 
 class DetailFilmViewModel (private val catalogRepository: CatalogRepository) : ViewModel() {

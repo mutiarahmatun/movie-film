@@ -3,16 +3,14 @@ package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.FilmEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.CatalogRepository
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.DataDummy
 import com.nhaarman.mockitokotlin2.verify
-import junit.framework.Assert
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito

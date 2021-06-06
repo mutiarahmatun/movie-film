@@ -2,14 +2,12 @@ package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.app.ShareCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.ItemMovieFilmBinding
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.FilmEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.API_IMAGE_ENDPOINT
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.ENDPOINT_POSTER_SIZE_W185
-import java.util.ArrayList
+import java.util.*
 
 class FilmAdapter (private val callback: FilmCallback) :
     RecyclerView.Adapter<FilmAdapter.ListViewHolder>() {

@@ -2,7 +2,6 @@ package com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.FilmEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.RemoteDataSource
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.MovieResponse
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.TvShowResponse

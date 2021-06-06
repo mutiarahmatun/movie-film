@@ -10,10 +10,10 @@ import com.nhaarman.mockitokotlin2.doAnswer
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import kotlinx.coroutines.runBlocking
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Rule
+import org.junit.Test
 import org.mockito.Mockito
 
 class CatalogRepositoryTest {

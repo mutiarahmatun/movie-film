@@ -1,84 +1,61 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote
 
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.api.ApiClient
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.api.ApiService
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.MovieResponse
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.TvShowResponse
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.vo.ApiResponse
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.EspressoIdlingResource
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okio.IOException
 import retrofit2.await
+import javax.inject.Inject
 
-class RemoteDataSource {
+class RemoteDataSource @Inject constructor(private val catalogApiService: ApiService) {
 
-    companion object {
-
-        @Volatile
-        private var instance: RemoteDataSource? = null
-
-        fun getInstance(): RemoteDataSource =
-            instance ?: synchronized(this) {
-                instance ?: RemoteDataSource()
+    fun getNowPlayingMovies(): LiveData<ApiResponse<List<MovieResponse>>> {
+        EspressoIdlingResource.increment()
+        val resultMovieResponse = MutableLiveData<ApiResponse<List<MovieResponse>>>()
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = catalogApiService.getNowPlayingMovies().await()
+                resultMovieResponse.postValue(ApiResponse.success(response.result!!))
+            } catch (e: IOException) {
+                e.printStackTrace()
+                resultMovieResponse.postValue(
+                    ApiResponse.error(
+                        e.message.toString(),
+                        mutableListOf()
+                    )
+                )
             }
-    }
-
-    suspend fun getNowPlayingMovies(
-        callback: LoadNowPlayingMoviesCallback
-    ) {
-        EspressoIdlingResource.increment()
-
-        ApiClient.instance.getNowPlayingMovies().await().result?.let { listMovie ->
-
-            callback.onAllMoviesReceived(listMovie)
-
-            EspressoIdlingResource.decrement()
         }
+        EspressoIdlingResource.decrement()
+        return resultMovieResponse
     }
 
-    suspend fun getMovieDetail(movieId: Int, callback: LoadMovieDetailCallback) {
+    fun getTvShowOnTheAir(): LiveData<ApiResponse<List<TvShowResponse>>> {
         EspressoIdlingResource.increment()
-
-        ApiClient.instance.getDetailMovie(movieId).await().let { movie ->
-
-            callback.onMovieDetailReceived(movie)
-
-            EspressoIdlingResource.decrement()
+        val resultTvShowResponse = MutableLiveData<ApiResponse<List<TvShowResponse>>>()
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = catalogApiService.getTvShowOnTheAir().await()
+                resultTvShowResponse.postValue(ApiResponse.success(response.result!!))
+            } catch (e: IOException) {
+                e.printStackTrace()
+                resultTvShowResponse.postValue(
+                    ApiResponse.error(
+                        e.message.toString(),
+                        mutableListOf()
+                    )
+                )
+            }
         }
-    }
-
-    suspend fun getTvShowOnTheAir(callback: LoadOnTheAirTvShowCallback) {
-        EspressoIdlingResource.increment()
-
-        ApiClient.instance.getTvShowOnTheAir().await().result?.let { listTvShow ->
-
-            callback.onAllTvShowsReceived(listTvShow)
-
-            EspressoIdlingResource.decrement()
-        }
-    }
-
-    suspend fun getTvShowDetail(tvShowId: Int, callback: LoadTvShowDetailCallback) {
-        EspressoIdlingResource.increment()
-
-        ApiClient.instance.getDetailTvShow(tvShowId).await().let { tvShow ->
-
-            callback.onTvShowDetailReceived(tvShow)
-
-            EspressoIdlingResource.decrement()
-        }
-    }
-
-    interface LoadNowPlayingMoviesCallback {
-        fun onAllMoviesReceived(movieResponse: List<MovieResponse>)
-    }
-
-    interface LoadMovieDetailCallback {
-        fun onMovieDetailReceived(movieResponse: MovieResponse)
-    }
-
-    interface LoadOnTheAirTvShowCallback {
-        fun onAllTvShowsReceived(tvShowResponse: List<TvShowResponse>)
-    }
-
-    interface LoadTvShowDetailCallback {
-        fun onTvShowDetailReceived(tvShowResponse: TvShowResponse)
+        EspressoIdlingResource.decrement()
+        return resultTvShowResponse
     }
 
 }

@@ -1,6 +1,5 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.utils
 
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.FilmEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.MovieResponse
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.TvShowResponse
 
