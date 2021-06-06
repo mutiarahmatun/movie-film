@@ -1,14 +1,26 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvShowEntity
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.vo.Resource
 
 interface CatalogDataSource {
 
-    fun getNowPlayingMovies(): LiveData<List<FilmEntity>>
+    fun getNowPlayingMovies(): LiveData<Resource<PagedList<MovieEntity>>>
 
-    fun getMovieDetail(movieId: Int): LiveData<FilmEntity>
+    fun getListFavoriteMovies(): LiveData<PagedList<MovieEntity>>
 
-    fun getTvShowOnTheAir(): LiveData<List<FilmEntity>>
+    fun getMovieDetail(movieId: Int): LiveData<MovieEntity>
 
-    fun getTvShowDetail(tvShowId: Int): LiveData<FilmEntity>
+    fun getTvShowOnTheAir(): LiveData<Resource<PagedList<TvShowEntity>>>
+
+    fun getListFavoriteTvShows(): LiveData<PagedList<TvShowEntity>>
+
+    fun getTvShowDetail(tvShowId: Int): LiveData<TvShowEntity>
+
+    fun setFavoriteMovie(movie: MovieEntity)
+
+    fun setFavoriteTvShow(tvShow: TvShowEntity)
 }

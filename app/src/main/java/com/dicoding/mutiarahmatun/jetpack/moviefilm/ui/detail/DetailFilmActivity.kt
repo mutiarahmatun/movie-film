@@ -2,7 +2,6 @@ package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.R
@@ -14,8 +13,10 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_TV_SHOW
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.setGlideImage
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
+import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
-class DetailFilmActivity : AppCompatActivity() {
+class DetailFilmActivity : DaggerAppCompatActivity() {
 
     companion object {
         const val EXTRA_DATA = "extra_data"
@@ -23,17 +24,15 @@ class DetailFilmActivity : AppCompatActivity() {
     }
 
     private lateinit var detailFilmBinding: ActivityDetailFilmBinding
+    private lateinit var viewModel: DetailFilmViewModel
+
+    @Inject
+    lateinit var factory: ViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         detailFilmBinding = ActivityDetailFilmBinding.inflate(layoutInflater)
         setContentView(detailFilmBinding.root)
-
-        val factory = ViewModelFactory.getInstance()
-        val viewModel = ViewModelProvider(
-            this@DetailFilmActivity,
-            factory
-        )[DetailFilmViewModel::class.java]
 
         supportActionBar?.title = "Detail Film"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

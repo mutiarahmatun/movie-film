@@ -3,7 +3,6 @@ package com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.CatalogRepository
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.di.Injection
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.FilmViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmViewModel
 

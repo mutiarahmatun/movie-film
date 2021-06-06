@@ -25,6 +25,9 @@ data class MovieEntity(
         @ColumnInfo(name = "movieDesc")
         var desc: String? = null,
 
+        @ColumnInfo(name = "movieReleaseYear")
+        var releaseYear: String? = null,
+
         @ColumnInfo(name = "moviePoster")
         var poster: String? = null,
 

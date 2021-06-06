@@ -25,6 +25,9 @@ data class TvShowEntity(
     @ColumnInfo(name = "tvShowDesc")
     var desc: String? = null,
 
+    @ColumnInfo(name = "tvShowReleaseYear")
+    var releaseYear: String? = null,
+
     @ColumnInfo(name = "tvShowPoster")
     var poster: String? = null,
 
