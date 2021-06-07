@@ -1,9 +1,7 @@
 <resources>
-    <string name="app_name">MovieFilm</string>
+    <string name="app_name">Movie Film</string>
     <string name="image_preview">Image Preview</string>
     <string name="image_preview_dark">Image Preview Dark</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="movie">Movie</string>
     <string name="tv_show">TV Show</string>
     <string name="title">Judul</string>
@@ -11,4 +9,10 @@
     <string name="genre">Genre</string>
     <string name="share_text">Saya membagikan Film %s</string>
     <string name="release">Release Year</string>
+    <string name="favorite">Favorite</string>
+    <string name="no_connection">No Internet Connection</string>
+    <string name="empty_favorite">No favorites yet</string>
+    <string name="empty_favorite_list">You don\'t have a list of favorite movie film.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

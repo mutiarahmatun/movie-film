@@ -10,17 +10,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.FragmentMovieBinding
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.FilmAdapter
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.FilmCallback
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.FilmViewModel
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home.HomeViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmActivity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_MOVIE
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
 
-class MovieFragment : Fragment(), FilmCallback {
+class MovieFragment : Fragment(), MovieCallback {
 
     private lateinit var movieBinding: FragmentMovieBinding
-    private lateinit var viewModelFilm: FilmViewModel
+    private lateinit var viewModelHome: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,16 +34,16 @@ class MovieFragment : Fragment(), FilmCallback {
 
         val factory = ViewModelFactory.getInstance()
         activity?.let {
-            viewModelFilm = ViewModelProvider(
+            viewModelHome = ViewModelProvider(
                 it,
                 factory
-            )[FilmViewModel::class.java]
+            )[HomeViewModel::class.java]
         }
 
-        viewModelFilm.getListNowPlayingMovies().observe(viewLifecycleOwner, Observer { listMovie ->
+        viewModelHome.getListNowPlayingMovies().observe(viewLifecycleOwner, Observer { listMovie ->
             movieBinding.rvMovie.adapter?.let { adapter ->
                 when (adapter) {
-                    is FilmAdapter -> adapter.setData(listMovie)
+                    is MovieAdapter -> adapter.setData(listMovie)
                 }
             }
         })
@@ -55,7 +53,7 @@ class MovieFragment : Fragment(), FilmCallback {
     private fun setRecycler() {
         movieBinding.rvMovie.apply {
             layoutManager = GridLayoutManager(context, 2)
-            adapter = FilmAdapter(this@MovieFragment)
+            adapter = MovieAdapter(this@MovieFragment)
         }
     }
 

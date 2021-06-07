@@ -1,16 +1,21 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.R
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.ActivityHomeBinding
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.FilmViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.android.support.DaggerAppCompatActivity
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : DaggerAppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var viewModel: FilmViewModel
+    private lateinit var viewModel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,14 +26,26 @@ class HomeActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(
             this@HomeActivity,
             factory
-        )[FilmViewModel::class.java]
+        )[HomeViewModel::class.java]
 
         setSupportActionBar(binding.toolBar)
         supportActionBar?.title = ""
         supportActionBar?.elevation = 0f
 
-        val sectionPagerAdapter = SectionPagerAdapter(this, supportFragmentManager)
-        binding.viewPager.adapter = sectionPagerAdapter
-        binding.tabs.setupWithViewPager(binding.viewPager)
+        setupNavigationController()
+    }
+
+    private fun setupNavigationController() {
+        val navView: BottomNavigationView = binding.bottomNavbar
+        val navController = findNavController(R.id.nav_host_fragment)
+
+        val appBarConfiguration = AppBarConfiguration.Builder(
+                R.id.navigation_movie,
+                R.id.navigation_tvshow,
+                R.id.navigation_favorite
+        ).build()
+
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 }

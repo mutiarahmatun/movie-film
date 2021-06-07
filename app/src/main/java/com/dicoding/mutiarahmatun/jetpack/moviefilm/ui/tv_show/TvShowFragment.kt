@@ -10,17 +10,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.FragmentTvShowBinding
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.FilmAdapter
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.FilmCallback
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.FilmViewModel
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.movie.MovieAdapter
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.movie.MovieCallback
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home.HomeViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmActivity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_TV_SHOW
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
 
-class TvShowFragment : Fragment(), FilmCallback {
+class TvShowFragment : Fragment(), MovieCallback {
 
     private lateinit var tvShowBinding: FragmentTvShowBinding
-    private lateinit var viewModelFilm: FilmViewModel
+    private lateinit var viewModelHome: HomeViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -35,16 +35,16 @@ class TvShowFragment : Fragment(), FilmCallback {
 
         val factory = ViewModelFactory.getInstance()
         activity?.let {
-            viewModelFilm = ViewModelProvider(
+            viewModelHome = ViewModelProvider(
                 it,
                 factory
-            )[FilmViewModel::class.java]
+            )[HomeViewModel::class.java]
         }
 
-        viewModelFilm.getListOnTheAirTvShows().observe(viewLifecycleOwner, Observer { listTvShow ->
+        viewModelHome.getListOnTheAirTvShows().observe(viewLifecycleOwner, Observer { listTvShow ->
             tvShowBinding.rvTvShow.adapter.let { adapter ->
                 when (adapter) {
-                    is FilmAdapter -> adapter.setData(listTvShow)
+                    is MovieAdapter -> adapter.setData(listTvShow)
                 }
             }
         })
@@ -53,7 +53,7 @@ class TvShowFragment : Fragment(), FilmCallback {
     private fun setRecycler() {
         tvShowBinding.rvTvShow.apply {
             layoutManager = GridLayoutManager(context, 2)
-            adapter = FilmAdapter(this@TvShowFragment)
+            adapter = MovieAdapter(this@TvShowFragment)
         }
     }
 
