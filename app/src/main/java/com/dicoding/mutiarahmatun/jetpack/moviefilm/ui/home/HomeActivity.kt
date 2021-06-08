@@ -41,7 +41,7 @@ class HomeActivity : DaggerAppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration.Builder(
                 R.id.navigation_movie,
-                R.id.navigation_tvshow,
+                R.id.navigation_tv_show,
                 R.id.navigation_favorite
         ).build()
 

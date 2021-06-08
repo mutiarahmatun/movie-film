@@ -37,7 +37,7 @@
         android:id="@+id/desc_empty_state"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/empty_favorite_list"
+        android:text="@string/empty_favorite_movie_list"
         android:textAlignment="center"
         android:textColor="#494848"
         android:textSize="14sp"

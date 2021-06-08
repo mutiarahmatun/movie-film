@@ -18,6 +18,7 @@ android {
 
         buildConfigField "String", "TMDB_API_KEY", '"59915e39de80d47fac7e75a9b0d2a730"'
         buildConfigField "String", "BASE_URL_TMDB", '"https://api.themoviedb.org/3/"'
+        buildConfigField("String", "BASE_URL_IMAGE_TMDB", '"https://image.tmdb.org/t/p/"')
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

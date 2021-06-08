@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.favorite.tvshow.FavTvShowFragment">
+    tools:context=".ui.favorite.tv_show.FavTvShowFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_fav_tv_show"

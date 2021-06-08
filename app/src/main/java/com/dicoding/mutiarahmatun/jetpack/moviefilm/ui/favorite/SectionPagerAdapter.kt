@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.R
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.movie.MovieFragment
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.tv_show.TvShowFragment
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.movie.FavMovieFragment
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.tv_show.FavTvShowFragment
 
 class SectionPagerAdapter(private val mContext: Context, fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
@@ -21,8 +21,8 @@ class SectionPagerAdapter(private val mContext: Context, fm: FragmentManager) : 
 
     override fun getItem(position: Int): Fragment =
         when (position) {
-            0 -> MovieFragment()
-            1 -> TvShowFragment()
+            0 -> FavMovieFragment()
+            1 -> FavTvShowFragment()
             else -> Fragment()
         }
 

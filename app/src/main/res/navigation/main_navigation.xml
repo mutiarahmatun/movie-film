@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@+id/main_navigation">
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/navigation_movie">
+
+    <fragment
+        android:id="@+id/navigation_movie"
+        android:name="com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.movie.MovieFragment"
+        android:label="@string/toolbar_title_movie"
+        tools:layout="@layout/fragment_movie"/>
+
+    <fragment
+        android:id="@+id/navigation_tv_show"
+        android:name="com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.tv_show.TvShowFragment"
+        android:label="@string/toolbar_title_tv_show"
+        tools:layout="@layout/fragment_tv_show"/>
+
+    <fragment
+        android:id="@+id/navigation_favorite"
+        android:label="@string/favorite"
+        android:name="com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.FavoriteFragment"
+        tools:layout="@layout/fragment_favorite"/>
+
+    <fragment
+        android:id="@+id/nav_fav_movie"
+        android:name="com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.movie.FavMovieFragment"
+        android:label="fragment_fav_movie"
+        tools:layout="@layout/fragment_fav_movie"/>
+
+    <fragment
+        android:id="@+id/nav_fav_tv_show"
+        android:label="fragment_fav_tv_show"
+        android:name="com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.tv_show.FavTvShowFragment"
+        tools:layout="@layout/fragment_fav_tv_show" />
 
 </navigation>

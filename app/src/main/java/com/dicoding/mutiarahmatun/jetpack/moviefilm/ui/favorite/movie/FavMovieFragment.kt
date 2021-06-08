@@ -1,39 +1,100 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.movie
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
+import android.view.View.GONE
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.R
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.FragmentFavMovieBinding
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmActivity
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.FavoriteViewModel
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.movie.MovieAdapter
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.movie.MovieCallback
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
 import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 class FavMovieFragment : DaggerFragment(), MovieCallback {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fav_movie, container, false)
+    private lateinit var favoriteViewModel: FavoriteViewModel
+    private lateinit var binding: FragmentFavMovieBinding
+
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
+        binding = FragmentFavMovieBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FavMovieFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                FavMovieFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setupRecyclerView()
+
+        parentFragment?.let {
+            favoriteViewModel = ViewModelProvider(it, factory)[FavoriteViewModel::class.java]
+        }
+        observeFavoriteMovies()
+
+    }
+
+    private fun observeFavoriteMovies() {
+        favoriteViewModel.getListFavoriteMovie().observe(viewLifecycleOwner, Observer {
+            if (it != null){
+                binding.rvFavMovie.adapter?.let {adapter ->
+                    when (adapter) {
+                        is MovieAdapter -> {
+                            if (it.isNullOrEmpty()){
+                                binding.rvFavMovie.visibility = GONE
+                                enableEmptyStateEmptyFavoriteMovie()
+                            } else {
+                                binding.rvFavMovie.visibility = VISIBLE
+                                binding.rvFavMovie.adapter.submitList(it)
+                                adapter.notifyDataSetChanged()
+                            }
+                        }
                     }
                 }
+            }
+        })
     }
+    private fun setupRecyclerView() {
+        binding.rvFavMovie.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = MovieAdapter(this@FavMovieFragment)
+        }
+    }
+
+    private fun enableEmptyStateEmptyFavoriteMovie() {
+
+        binding.favMovieEmptyState.imgEmptyState.setImageResource(R.drawable.ic_empty_state_favorite)
+        binding.favMovieEmptyState.imgEmptyState.contentDescription =
+            resources.getString(R.string.empty_favorite_movie_list)
+        binding.favMovieEmptyState.titleEmptyState.text = resources.getString(R.string.empty_favorite)
+        binding.favMovieEmptyState.descEmptyState.text =
+            resources.getString(R.string.empty_favorite_movie_list)
+        binding.favMovieEmptyState.visibility = VISIBLE
+    }
+
+    override fun onItemClicked(data: MovieEntity) {
+        startActivity(
+            Intent(
+                context,
+                DetailFilmActivity::class.java
+            )
+                .putExtra(DetailFilmActivity.EXTRA_DATA, data.movieId)
+                .putExtra(DetailFilmActivity.EXTRA_TYPE, Constants.TYPE_MOVIE)
+        )
+    }
+
 }

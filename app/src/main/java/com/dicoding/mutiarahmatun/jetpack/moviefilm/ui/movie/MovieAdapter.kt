@@ -1,24 +1,31 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.movie
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.BuildConfig
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.ItemMovieFilmBinding
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.API_IMAGE_ENDPOINT
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.ENDPOINT_POSTER_SIZE_W185
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.loadFromUrl
 import java.util.*
 
 class MovieAdapter (private val callback: MovieCallback) :
-    RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
+    PagedListAdapter<MovieEntity, MovieAdapter.ListViewHolder>(DIFF_CALLBACK) {
 
-    private val listFilmEntity = ArrayList<FilmEntity>()
-
-    fun setData(filmEntity: List<FilmEntity>?) {
-        if (filmEntity == null) return
-        listFilmEntity.clear()
-        listFilmEntity.addAll(filmEntity)
-        notifyDataSetChanged()
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieEntity>() {
+            override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
+                return oldItem.movieId == newItem.movieId
+            }
+            override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -27,27 +34,28 @@ class MovieAdapter (private val callback: MovieCallback) :
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.bind(listFilmEntity[position])
-    }
-
-    override fun getItemCount(): Int {
-        return listFilmEntity.size
-    }
-
-    inner class ListViewHolder (private val viewBinding: ItemMovieFilmBinding) : RecyclerView.ViewHolder(viewBinding.root) {
-        fun bind(filmEntity: FilmEntity) {
-            with(viewBinding) {
-                tvTitle.text = filmEntity.title
-
-                filmEntity.imgPoster?.let {
-                    Glide.with(itemView.context)
-                            .load(API_IMAGE_ENDPOINT+ ENDPOINT_POSTER_SIZE_W185 + filmEntity.imgPoster)
-                            .into(imgItemPhoto)
-                }
-
-                itemView.setOnClickListener { callback?.onItemClicked(filmEntity) }
-            }
+        val movie = getItem(position)
+        if (movie != null) {
+            holder.bind(movie)
         }
     }
+
+    inner class ListViewHolder(private val viewBinding: ItemMovieFilmBinding) : RecyclerView.ViewHolder(viewBinding.root) {
+        fun bind(data: MovieEntity) {
+            with(viewBinding) {
+                data.poster?.let {
+                    imgItemPhoto.loadFromUrl(BuildConfig.BASE_URL_IMAGE_TMDB + Constants.ENDPOINT_POSTER_SIZE_W185 + it)
+                }
+                tvTitle.text = data.name
+
+                itemFilm.setOnClickListener {
+                    callback.onItemClicked(data)
+                }
+
+            }
+
+        }
+    }
+
 
 }
