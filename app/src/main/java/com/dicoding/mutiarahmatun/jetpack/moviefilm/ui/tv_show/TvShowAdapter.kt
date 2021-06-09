@@ -2,23 +2,28 @@ package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.tv_show
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.BuildConfig
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvShowEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.ItemMovieFilmBinding
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.API_IMAGE_ENDPOINT
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.ENDPOINT_POSTER_SIZE_W185
-import java.util.*
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.loadFromUrl
 
-class TvShowAdapter (private val callback: MovieCallback) :
-    RecyclerView.Adapter<TvShowAdapter.ListViewHolder>() {
+class TvShowAdapter (private val callback: TvShowCallback) :
+    PagedListAdapter<TvShowEntity, TvShowAdapter.ListViewHolder>(DIFF_CALLBACK) {
 
-    private val listFilmEntity = ArrayList<FilmEntity>()
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TvShowEntity>() {
+            override fun areItemsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem.tvShowId == newItem.tvShowId
+            }
 
-    fun setData(filmEntity: List<FilmEntity>?) {
-        if (filmEntity == null) return
-        listFilmEntity.clear()
-        listFilmEntity.addAll(filmEntity)
-        notifyDataSetChanged()
+            override fun areContentsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -27,25 +32,22 @@ class TvShowAdapter (private val callback: MovieCallback) :
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.bind(listFilmEntity[position])
-    }
-
-    override fun getItemCount(): Int {
-        return listFilmEntity.size
+        val tvShow = getItem(position)
+        if (tvShow != null) {
+            holder.bind(tvShow)
+        }
     }
 
     inner class ListViewHolder (private val viewBinding: ItemMovieFilmBinding) : RecyclerView.ViewHolder(viewBinding.root) {
-        fun bind(filmEntity: FilmEntity) {
+        fun bind(tvShowEntity: TvShowEntity) {
             with(viewBinding) {
-                tvTitle.text = filmEntity.title
+                tvTitle.text = tvShowEntity.name
 
-                filmEntity.imgPoster?.let {
-                    Glide.with(itemView.context)
-                            .load(API_IMAGE_ENDPOINT+ ENDPOINT_POSTER_SIZE_W185 + filmEntity.imgPoster)
-                            .into(imgItemPhoto)
+                tvShowEntity.poster?.let {
+                    imgItemPhoto.loadFromUrl(BuildConfig.BASE_URL_IMAGE_TMDB + Constants.ENDPOINT_POSTER_SIZE_W185 + it)
                 }
 
-                itemView.setOnClickListener { callback?.onItemClicked(filmEntity) }
+                itemFilm.setOnClickListener { callback?.onItemClicked(tvShowEntity) }
             }
         }
     }

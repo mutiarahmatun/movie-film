@@ -11,18 +11,21 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.ActivityHomeBind
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
 class HomeActivity : DaggerAppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var viewModel: HomeViewModel
 
+    @Inject
+    lateinit var factory: ViewModelFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val factory = ViewModelFactory.getInstance()
         viewModel = ViewModelProvider(
             this@HomeActivity,
             factory

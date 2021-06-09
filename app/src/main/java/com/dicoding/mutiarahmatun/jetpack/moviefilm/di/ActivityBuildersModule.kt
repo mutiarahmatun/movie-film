@@ -1,5 +1,8 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.di
 
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.di.home.HomeFragmentBuildersModule
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmActivity
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home.HomeActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -10,6 +13,6 @@ abstract class ActivityBuildersModule {
     abstract fun contributeHomeActivity(): HomeActivity
 
     @ContributesAndroidInjector
-    abstract fun contributeDetailActivity(): DetailActivity
+    abstract fun contributeDetailActivity(): DetailFilmActivity
 
 }

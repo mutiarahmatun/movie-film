@@ -59,7 +59,7 @@ class FavMovieFragment : DaggerFragment(), MovieCallback {
                                 enableEmptyStateEmptyFavoriteMovie()
                             } else {
                                 binding.rvFavMovie.visibility = VISIBLE
-                                binding.rvFavMovie.adapter.submitList(it)
+                                adapter.submitList(it)
                                 adapter.notifyDataSetChanged()
                             }
                         }
@@ -83,7 +83,7 @@ class FavMovieFragment : DaggerFragment(), MovieCallback {
         binding.favMovieEmptyState.titleEmptyState.text = resources.getString(R.string.empty_favorite)
         binding.favMovieEmptyState.descEmptyState.text =
             resources.getString(R.string.empty_favorite_movie_list)
-        binding.favMovieEmptyState.visibility = VISIBLE
+        binding.favMovieEmptyState.emptyState.visibility = VISIBLE
     }
 
     override fun onItemClicked(data: MovieEntity) {

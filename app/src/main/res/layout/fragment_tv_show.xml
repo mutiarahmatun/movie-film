@@ -18,6 +18,7 @@
         tools:listitem="@layout/item_movie_film"/>
 
     <include
+        android:id="@+id/progress_bar"
         layout="@layout/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

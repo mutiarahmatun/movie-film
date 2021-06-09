@@ -7,7 +7,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
-@Entity(tableName = "tb_favorite_tvshow")
+@Entity(tableName = "tb_favorite_tv_show")
 @Parcelize
 data class TvShowEntity(
 

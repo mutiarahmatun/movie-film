@@ -8,7 +8,7 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.vo.ApiResponse
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.EspressoIdlingResource
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import okio.IOException
 import retrofit2.await
@@ -19,7 +19,7 @@ class RemoteDataSource @Inject constructor(private val catalogApiService: ApiSer
     fun getNowPlayingMovies(): LiveData<ApiResponse<List<MovieResponse>>> {
         EspressoIdlingResource.increment()
         val resultMovieResponse = MutableLiveData<ApiResponse<List<MovieResponse>>>()
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(IO).launch {
             try {
                 val response = catalogApiService.getNowPlayingMovies().await()
                 resultMovieResponse.postValue(ApiResponse.success(response.result!!))
@@ -40,7 +40,7 @@ class RemoteDataSource @Inject constructor(private val catalogApiService: ApiSer
     fun getTvShowOnTheAir(): LiveData<ApiResponse<List<TvShowResponse>>> {
         EspressoIdlingResource.increment()
         val resultTvShowResponse = MutableLiveData<ApiResponse<List<TvShowResponse>>>()
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(IO).launch {
             try {
                 val response = catalogApiService.getTvShowOnTheAir().await()
                 resultTvShowResponse.postValue(ApiResponse.success(response.result!!))

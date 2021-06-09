@@ -1,18 +1,15 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.movie
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.BuildConfig
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.ItemMovieFilmBinding
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.loadFromUrl
-import java.util.*
 
 class MovieAdapter (private val callback: MovieCallback) :
     PagedListAdapter<MovieEntity, MovieAdapter.ListViewHolder>(DIFF_CALLBACK) {

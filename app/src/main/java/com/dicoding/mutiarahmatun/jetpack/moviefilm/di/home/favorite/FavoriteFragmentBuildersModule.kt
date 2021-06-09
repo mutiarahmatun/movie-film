@@ -1,5 +1,7 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.di.home.favorite
 
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.movie.FavMovieFragment
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.tv_show.FavTvShowFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -7,8 +9,8 @@ import dagger.android.ContributesAndroidInjector
 abstract class FavoriteFragmentBuildersModule {
 
     @ContributesAndroidInjector
-    abstract fun contributeFavoriteMovieFragment() : FavoriteMovieFragment
+    abstract fun contributeFavoriteMovieFragment() : FavMovieFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeFavoriteTvShowFragment() : FavoriteTvShowFragment
+    abstract fun contributeFavoriteTvShowFragment() : FavTvShowFragment
 }

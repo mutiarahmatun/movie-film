@@ -5,18 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.CatalogRepository
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home.HomeViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmViewModel
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.FavoriteViewModel
+import javax.inject.Inject
 
-class ViewModelFactory private constructor(private val mCatalogRepository: CatalogRepository): ViewModelProvider.NewInstanceFactory() {
-
-    companion object {
-        @Volatile
-        private var instance: ViewModelFactory? = null
-
-        fun getInstance(): ViewModelFactory =
-            instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideCatalogRepository())
-            }
-    }
+class ViewModelFactory @Inject constructor(private val mCatalogRepository: CatalogRepository): ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -26,6 +18,9 @@ class ViewModelFactory private constructor(private val mCatalogRepository: Catal
             }
             modelClass.isAssignableFrom(DetailFilmViewModel::class.java) -> {
                 DetailFilmViewModel(mCatalogRepository) as T
+            }
+            modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
+                FavoriteViewModel(mCatalogRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

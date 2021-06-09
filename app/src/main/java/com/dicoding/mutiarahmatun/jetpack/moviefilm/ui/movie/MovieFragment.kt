@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,11 +18,15 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants.TYPE_MOVIE
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.vo.Status
 import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 class MovieFragment : DaggerFragment(), MovieCallback {
 
     private lateinit var movieBinding: FragmentMovieBinding
     private lateinit var viewModelHome: HomeViewModel
+
+    @Inject
+    lateinit var factory: ViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,17 +35,18 @@ class MovieFragment : DaggerFragment(), MovieCallback {
         return movieBinding.root
     }
 
+    private fun setupViewModel(fragmentActivity: FragmentActivity) {
+        viewModelHome = ViewModelProvider(fragmentActivity, factory)[HomeViewModel::class.java]
+    }
+
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         setRecycler()
 
-        val factory = ViewModelFactory.getInstance()
         activity?.let {
-            viewModelHome = ViewModelProvider(
-                it,
-                factory
-            )[HomeViewModel::class.java]
+            setupViewModel(it)
         }
 
         viewModelHome.getListNowPlayingMovies().observe(viewLifecycleOwner, Observer { listMovie ->

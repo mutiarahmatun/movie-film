@@ -1,6 +1,7 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.di
 
 import android.app.Application
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.BaseApplication
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector

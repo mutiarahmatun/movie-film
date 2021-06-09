@@ -1,5 +1,7 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.di.home
 
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.di.home.favorite.FavoriteFragmentBuildersModule
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.FavoriteFragment
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.movie.MovieFragment
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.tv_show.TvShowFragment
 import dagger.Module

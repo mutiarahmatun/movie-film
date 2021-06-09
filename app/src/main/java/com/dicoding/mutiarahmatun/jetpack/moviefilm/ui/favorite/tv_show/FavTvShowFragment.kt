@@ -2,7 +2,6 @@ package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.tv_show
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -60,7 +59,7 @@ class FavTvShowFragment : DaggerFragment(), TvShowCallback {
                                 enableEmptyStateEmptyFavoriteTvShow()
                             } else {
                                 binding.rvFavTvShow.visibility = VISIBLE
-                                binding.rvFavTvShow.adapter.submitList(it)
+                                adapter.submitList(it)
                                 adapter.notifyDataSetChanged()
                             }
                         }
@@ -84,7 +83,7 @@ class FavTvShowFragment : DaggerFragment(), TvShowCallback {
         binding.favTvShowEmptyState.titleEmptyState.text = resources.getString(R.string.empty_favorite)
         binding.favTvShowEmptyState.descEmptyState.text =
             resources.getString(R.string.empty_favorite_tv_show_list)
-        binding.favTvShowEmptyState.visibility = VISIBLE
+        binding.favTvShowEmptyState.emptyState.visibility = VISIBLE
     }
 
     override fun onItemClicked(data: TvShowEntity) {

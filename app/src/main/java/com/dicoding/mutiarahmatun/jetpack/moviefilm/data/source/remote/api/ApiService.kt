@@ -6,7 +6,6 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.TvShowResponse
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
