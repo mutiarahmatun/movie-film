@@ -24,7 +24,9 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
         val dbSource = loadFromDB()
 
         result.addSource(dbSource) { data ->
+
             result.removeSource(dbSource)
+
             if (shouldFetch(data)) {
                 fetchFromNetwork(dbSource)
             } else {
@@ -51,14 +53,15 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
         result.addSource(dbSource) { newData ->
             result.value = Resource.loading(newData)
         }
+
         result.addSource(apiResponse) { response ->
             result.removeSource(apiResponse)
             result.removeSource(dbSource)
+
             when (response.status) {
                 StatusResponse.SUCCESS ->
                     CoroutineScope(IO).launch {
                         response.body?.let { saveCallResult(it) }
-                        Log.d("BOUND 1 : ", response.status.name)
 
                         withContext(Main) {
                             result.addSource(loadFromDB()) { newData ->
@@ -70,7 +73,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
                 StatusResponse.ERROR -> {
                     onFetchFailed()
-                    Log.d("BOUND 2 : ", response.status.name)
+
                     result.addSource(dbSource) { newData ->
                         result.value = Resource.error(response.message, newData)
                     }

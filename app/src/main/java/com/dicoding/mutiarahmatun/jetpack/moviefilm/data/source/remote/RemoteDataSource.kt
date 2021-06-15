@@ -17,15 +17,23 @@ import javax.inject.Inject
 class RemoteDataSource @Inject constructor(private val catalogApiService: ApiService) {
 
     fun getNowPlayingMovies(): LiveData<ApiResponse<List<MovieResponse>>> {
+
         EspressoIdlingResource.increment()
+
         val resultMovieResponse = MutableLiveData<ApiResponse<List<MovieResponse>>>()
+
         CoroutineScope(IO).launch {
             try {
+
                 val response = catalogApiService.getNowPlayingMovies().await()
                 resultMovieResponse.postValue(ApiResponse.success(response.result!!))
+
             } catch (e: IOException) {
+
                 e.printStackTrace()
+
                 resultMovieResponse.postValue(
+
                     ApiResponse.error(
                         e.message.toString(),
                         mutableListOf()
@@ -33,20 +41,30 @@ class RemoteDataSource @Inject constructor(private val catalogApiService: ApiSer
                 )
             }
         }
+
         EspressoIdlingResource.decrement()
+
         return resultMovieResponse
     }
 
     fun getTvShowOnTheAir(): LiveData<ApiResponse<List<TvShowResponse>>> {
+
         EspressoIdlingResource.increment()
+
         val resultTvShowResponse = MutableLiveData<ApiResponse<List<TvShowResponse>>>()
+
         CoroutineScope(IO).launch {
             try {
+
                 val response = catalogApiService.getTvShowOnTheAir().await()
                 resultTvShowResponse.postValue(ApiResponse.success(response.result!!))
+
             } catch (e: IOException) {
+
                 e.printStackTrace()
+
                 resultTvShowResponse.postValue(
+
                     ApiResponse.error(
                         e.message.toString(),
                         mutableListOf()
@@ -54,7 +72,9 @@ class RemoteDataSource @Inject constructor(private val catalogApiService: ApiSer
                 )
             }
         }
+
         EspressoIdlingResource.decrement()
+
         return resultTvShowResponse
     }
 

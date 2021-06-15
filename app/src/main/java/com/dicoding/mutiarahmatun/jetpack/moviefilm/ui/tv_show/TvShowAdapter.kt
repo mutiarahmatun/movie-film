@@ -41,9 +41,9 @@ class TvShowAdapter (private val callback: TvShowCallback) :
     inner class ListViewHolder (private val viewBinding: ItemMovieFilmBinding) : RecyclerView.ViewHolder(viewBinding.root) {
         fun bind(tvShowEntity: TvShowEntity) {
             with(viewBinding) {
-                tvTitle.text = tvShowEntity.name
+                tvTitle.text = tvShowEntity.title
 
-                tvShowEntity.poster?.let {
+                tvShowEntity.imgPoster?.let {
                     imgItemPhoto.loadFromUrl(BuildConfig.BASE_URL_IMAGE_TMDB + Constants.ENDPOINT_POSTER_SIZE_W185 + it)
                 }
 

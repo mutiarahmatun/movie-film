@@ -33,7 +33,6 @@ class LocalDataSource @Inject constructor(private val catalogDao: CatalogDao) {
     fun setFavoriteTvShow(tvShow : TvShowEntity) {
         tvShow.isFavorite = !tvShow.isFavorite
         catalogDao.updateTvShow(tvShow)
-
     }
 
 }

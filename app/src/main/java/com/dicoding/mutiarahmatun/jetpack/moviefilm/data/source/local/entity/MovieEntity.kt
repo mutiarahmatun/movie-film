@@ -20,19 +20,19 @@ data class MovieEntity(
         var movieId: Int = 0,
 
         @ColumnInfo(name = "movieName")
-        var name: String? = null,
+        var title: String? = null,
 
         @ColumnInfo(name = "movieDesc")
-        var desc: String? = null,
+        var description: String? = null,
 
         @ColumnInfo(name = "movieReleaseYear")
         var releaseYear: String? = null,
 
         @ColumnInfo(name = "moviePoster")
-        var poster: String? = null,
+        var imgPoster: String? = null,
 
         @ColumnInfo(name = "movieImgPreview")
-        var imgPreview: String? = null,
+        var imgBackground: String? = null,
 
         @NonNull
         @ColumnInfo(name = "isFavorite")

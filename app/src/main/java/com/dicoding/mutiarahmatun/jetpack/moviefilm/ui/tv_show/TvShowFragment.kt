@@ -12,8 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvShowEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.FragmentTvShowBinding
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home.HomeViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmActivity
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home.HomeViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants.TYPE_TV_SHOW
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.vo.Status
@@ -87,7 +87,7 @@ class TvShowFragment : DaggerFragment(), TvShowCallback {
     override fun onItemClicked(tvShowEntity: TvShowEntity) {
         startActivity(
             Intent(context, DetailFilmActivity::class.java)
-                .putExtra(DetailFilmActivity.EXTRA_DATA, tvShowEntity.id)
+                .putExtra(DetailFilmActivity.EXTRA_DATA, tvShowEntity.tvShowId)
                 .putExtra(DetailFilmActivity.EXTRA_TYPE, TYPE_TV_SHOW)
         )
     }

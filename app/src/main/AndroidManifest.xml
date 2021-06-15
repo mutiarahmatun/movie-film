@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.dicoding.mutiarahmatun.jetpack.moviefilm">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_mf"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo_mf"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MovieFilm">
+        android:theme="@style/Theme.MovieFilm"
+        tools:ignore="AllowBackup">
         <activity android:name=".ui.detail.DetailFilmActivity"/>
         <activity android:name=".ui.home.HomeActivity">
             <intent-filter>

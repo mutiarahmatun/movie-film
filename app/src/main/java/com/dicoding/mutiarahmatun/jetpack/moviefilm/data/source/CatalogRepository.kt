@@ -17,30 +17,37 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CatalogRepository @Inject constructor(
+
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
+
     ) : CatalogDataSource {
 
     override fun getNowPlayingMovies(): LiveData<Resource<PagedList<MovieEntity>>> {
+
         return object : NetworkBoundResource<PagedList<MovieEntity>, List<MovieResponse>>() {
+
             public override fun loadFromDB(): LiveData<PagedList<MovieEntity>> {
+
                 val config = PagedList.Config.Builder().apply {
                     setEnablePlaceholders(false)
                     setInitialLoadSizeHint(4)
                     setPageSize(4)
                 }.build()
+
                 return LivePagedListBuilder(localDataSource.getListMovies(), config).build()
             }
 
             override fun shouldFetch(data: PagedList<MovieEntity>?): Boolean =
                 data == null || data.isEmpty()
 
-
             public override fun createCall(): LiveData<ApiResponse<List<MovieResponse>>> =
                 remoteDataSource.getNowPlayingMovies()
 
             public override fun saveCallResult(data: List<MovieResponse>) {
+
                 val movieList = ArrayList<MovieEntity>()
+
                 for (item in data) {
                     val movie = MovieEntity(
                         null,
@@ -52,6 +59,7 @@ class CatalogRepository @Inject constructor(
                         item.imgBackground,
                         false
                     )
+
                     movieList.add(movie)
                 }
 
@@ -62,11 +70,13 @@ class CatalogRepository @Inject constructor(
     }
 
     override fun getListFavoriteMovies(): LiveData<PagedList<MovieEntity>> {
+
         val config = PagedList.Config.Builder().apply {
             setEnablePlaceholders(false)
             setInitialLoadSizeHint(4)
             setPageSize(4)
         }.build()
+
         return LivePagedListBuilder(localDataSource.getListFavoriteMovies(), config).build()
     }
 
@@ -75,13 +85,17 @@ class CatalogRepository @Inject constructor(
 
 
     override fun getTvShowOnTheAir(): LiveData<Resource<PagedList<TvShowEntity>>> {
+
         return object : NetworkBoundResource<PagedList<TvShowEntity>, List<TvShowResponse>>() {
+
             public override fun loadFromDB(): LiveData<PagedList<TvShowEntity>> {
+
                 val config = PagedList.Config.Builder().apply {
                     setEnablePlaceholders(false)
                     setInitialLoadSizeHint(4)
                     setPageSize(4)
                 }.build()
+
                 return LivePagedListBuilder(localDataSource.getListTvShows(), config).build()
             }
 
@@ -93,7 +107,9 @@ class CatalogRepository @Inject constructor(
 
 
             public override fun saveCallResult(data: List<TvShowResponse>) {
+
                 val tvShowList = ArrayList<TvShowEntity>()
+
                 for (item in data) {
                     val tvShow = TvShowEntity(
                         null,
@@ -115,11 +131,13 @@ class CatalogRepository @Inject constructor(
     }
 
     override fun getListFavoriteTvShows(): LiveData<PagedList<TvShowEntity>> {
+
         val config = PagedList.Config.Builder().apply {
             setEnablePlaceholders(false)
             setInitialLoadSizeHint(4)
             setPageSize(4)
         }.build()
+
         return LivePagedListBuilder(localDataSource.getListFavoriteTvShows(), config).build()
     }
 

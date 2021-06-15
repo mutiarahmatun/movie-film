@@ -12,8 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.FragmentMovieBinding
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home.HomeViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmActivity
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home.HomeViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants.TYPE_MOVIE
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.vo.Status
@@ -84,7 +84,7 @@ class MovieFragment : DaggerFragment(), MovieCallback {
     override fun onItemClicked(data: MovieEntity) {
         startActivity(
                 Intent(context, DetailFilmActivity::class.java)
-                        .putExtra(DetailFilmActivity.EXTRA_DATA, data.id)
+                        .putExtra(DetailFilmActivity.EXTRA_DATA, data.movieId)
                         .putExtra(DetailFilmActivity.EXTRA_TYPE, TYPE_MOVIE)
         )
     }

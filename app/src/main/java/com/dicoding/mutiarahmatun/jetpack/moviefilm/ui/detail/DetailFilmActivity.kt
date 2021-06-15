@@ -2,6 +2,7 @@ package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.BuildConfig
@@ -72,12 +73,14 @@ class DetailFilmActivity : DaggerAppCompatActivity() {
     }
 
     private fun displayData(movie: MovieEntity?, tvShow: TvShowEntity?) {
-        val urlImage = movie?.poster ?: tvShow?.poster
-        val urlHighlight = movie?.imgPreview ?: tvShow?.imgPreview
+        val urlImage = movie?.imgPoster ?: tvShow?.imgPoster
+        Log.d("ini adalah movie", "${movie}")
+        Log.d("ini adalah tv shoew", "${tvShow}")
+        val urlHighlight = movie?.imgBackground ?: tvShow?.imgBackground
         val statusFavorite = movie?.isFavorite ?: tvShow?.isFavorite
 
-        detailFilmBinding.tvTitle.text = movie?.name ?: tvShow?.name
-        detailFilmBinding.tvDescription.text = movie?.desc ?: tvShow?.desc
+        detailFilmBinding.tvTitle.text = movie?.title ?: tvShow?.title
+        detailFilmBinding.tvDescription.text = movie?.description ?: tvShow?.description
         detailFilmBinding.tvReleaseYear.text = movie?.releaseYear ?: tvShow?.releaseYear
 
         detailFilmBinding.imgShare.setOnClickListener{
@@ -92,8 +95,14 @@ class DetailFilmActivity : DaggerAppCompatActivity() {
             setFavoriteState(status)
         }
 
-        detailFilmBinding.imgItemPhoto.loadFromUrl(BuildConfig.BASE_URL_IMAGE_TMDB + Constants.ENDPOINT_POSTER_SIZE_W185 + urlImage)
-        detailFilmBinding.imgItemPreview.loadFromUrl(BuildConfig.BASE_URL_IMAGE_TMDB + Constants.ENDPOINT_POSTER_SIZE_W780 + urlHighlight)
+        detailFilmBinding.imgItemPhoto.loadFromUrl(
+                BuildConfig.BASE_URL_IMAGE_TMDB +
+                Constants.ENDPOINT_POSTER_SIZE_W185 +
+                        urlImage)
+        detailFilmBinding.imgItemPreview.loadFromUrl(
+                BuildConfig.BASE_URL_IMAGE_TMDB +
+                        Constants.ENDPOINT_POSTER_SIZE_W780 +
+                        urlHighlight)
 
         detailFilmBinding.fabFavorite.setOnClickListener {
             setFavorite(movie, tvShow)
@@ -116,17 +125,17 @@ class DetailFilmActivity : DaggerAppCompatActivity() {
     private fun setFavorite(movie: MovieEntity?, tvShow: TvShowEntity?) {
         if (movie != null) {
             if (movie.isFavorite){
-                showSnackBar("${movie.name} Removed from favorite")
+                showSnackBar("${movie.title} Removed from favorite")
             }else {
-                showSnackBar("${movie.name} Added to favorite")
+                showSnackBar("${movie.title} Added to favorite")
             }
             viewModel.setFavoriteMovie(movie)
         } else {
             if (tvShow != null) {
                 if (tvShow.isFavorite){
-                    showSnackBar("${tvShow.name} Aemoved from favorite")
+                    showSnackBar("${tvShow.title} Aemoved from favorite")
                 }else {
-                    showSnackBar("${tvShow.name} Removed from favorite")
+                    showSnackBar("${tvShow.title} Removed from favorite")
                 }
                 viewModel.setFavoriteTvShow(tvShow)
             }

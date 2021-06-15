@@ -17,4 +17,5 @@
 
     <string name="toolbar_title_movie">Now Playing Movie</string>
     <string name="toolbar_title_tv_show">TV Show On The Air</string>
+    <string name="floating_button">floating button</string>
 </resources>

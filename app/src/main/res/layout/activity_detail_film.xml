@@ -163,6 +163,7 @@
         app:backgroundTint="@color/colorAccent"
         app:layout_anchor="@id/img_item_preview"
         app:layout_anchorGravity="end|bottom|right"
-        app:maxImageSize="28dp" />
+        app:maxImageSize="28dp"
+        android:contentDescription="@string/floating_button" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

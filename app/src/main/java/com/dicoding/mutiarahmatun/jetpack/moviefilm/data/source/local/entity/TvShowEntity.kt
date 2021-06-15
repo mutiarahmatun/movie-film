@@ -11,30 +11,30 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class TvShowEntity(
 
-    @PrimaryKey(autoGenerate = true)
+        @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Int? = null,
 
-    @NonNull
+        @NonNull
     @ColumnInfo(name = "tvShowId")
     var tvShowId: Int = 0,
 
-    @ColumnInfo(name = "tvShowName")
-    var name: String? = null,
+        @ColumnInfo(name = "tvShowName")
+    var title: String? = null,
 
-    @ColumnInfo(name = "tvShowDesc")
-    var desc: String? = null,
+        @ColumnInfo(name = "tvShowDesc")
+    var description: String? = null,
 
-    @ColumnInfo(name = "tvShowReleaseYear")
+        @ColumnInfo(name = "tvShowReleaseYear")
     var releaseYear: String? = null,
 
-    @ColumnInfo(name = "tvShowPoster")
-    var poster: String? = null,
+        @ColumnInfo(name = "tvShowPoster")
+    var imgPoster: String? = null,
 
-    @ColumnInfo(name = "tvShowImgPreview")
-    var imgPreview: String? = null,
+        @ColumnInfo(name = "tvShowImgPreview")
+    var imgBackground: String? = null,
 
-    @NonNull
+        @NonNull
     @ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean = false
 ): Parcelable

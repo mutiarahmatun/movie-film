@@ -40,10 +40,10 @@ class MovieAdapter (private val callback: MovieCallback) :
     inner class ListViewHolder(private val viewBinding: ItemMovieFilmBinding) : RecyclerView.ViewHolder(viewBinding.root) {
         fun bind(data: MovieEntity) {
             with(viewBinding) {
-                data.poster?.let {
+                data.imgPoster?.let {
                     imgItemPhoto.loadFromUrl(BuildConfig.BASE_URL_IMAGE_TMDB + Constants.ENDPOINT_POSTER_SIZE_W185 + it)
                 }
-                tvTitle.text = data.name
+                tvTitle.text = data.title
 
                 itemFilm.setOnClickListener {
                     callback.onItemClicked(data)
