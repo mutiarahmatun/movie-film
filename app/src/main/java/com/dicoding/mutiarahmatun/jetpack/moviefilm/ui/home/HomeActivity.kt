@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class HomeActivity : DaggerAppCompatActivity() {
 
-    private lateinit var binding: ActivityHomeBinding
+    private lateinit var activityHomeBinding: ActivityHomeBinding
     private lateinit var viewModel: HomeViewModel
 
     @Inject
@@ -23,15 +23,15 @@ class HomeActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        activityHomeBinding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(activityHomeBinding.root)
 
         viewModel = ViewModelProvider(
             this@HomeActivity,
             factory
         )[HomeViewModel::class.java]
 
-        setSupportActionBar(binding.toolBar)
+        setSupportActionBar(activityHomeBinding.toolBar)
         supportActionBar?.title = ""
         supportActionBar?.elevation = 0f
 
@@ -39,7 +39,7 @@ class HomeActivity : DaggerAppCompatActivity() {
     }
 
     private fun setupNavigationController() {
-        val navView: BottomNavigationView = binding.bottomNavbar
+        val navView: BottomNavigationView = activityHomeBinding.bottomNavbar
         val navController = findNavController(R.id.nav_host_fragment)
 
         val appBarConfiguration = AppBarConfiguration.Builder(

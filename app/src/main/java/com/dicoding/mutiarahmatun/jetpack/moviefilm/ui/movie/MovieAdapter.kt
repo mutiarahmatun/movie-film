@@ -11,14 +11,16 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.ItemMovieFilmBin
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.loadFromUrl
 
-class MovieAdapter (private val callback: MovieCallback) :
+class MovieAdapter (private val movieCallback: MovieCallback) :
     PagedListAdapter<MovieEntity, MovieAdapter.ListViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieEntity>() {
+
             override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
                 return oldItem.movieId == newItem.movieId
             }
+
             override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
                 return oldItem == newItem
             }
@@ -26,7 +28,8 @@ class MovieAdapter (private val callback: MovieCallback) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val viewBinding = ItemMovieFilmBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val viewBinding = ItemMovieFilmBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(viewBinding)
     }
 
@@ -46,7 +49,7 @@ class MovieAdapter (private val callback: MovieCallback) :
                 tvTitle.text = data.title
 
                 itemFilm.setOnClickListener {
-                    callback.onItemClicked(data)
+                    movieCallback.onItemClicked(data)
                 }
 
             }

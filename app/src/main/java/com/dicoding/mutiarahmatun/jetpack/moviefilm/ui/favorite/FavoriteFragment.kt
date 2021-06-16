@@ -15,28 +15,28 @@ import javax.inject.Inject
 class FavoriteFragment : DaggerFragment() {
 
     private lateinit var viewModel: FavoriteViewModel
-    private lateinit var binding: FragmentFavoriteBinding
+    private lateinit var favoriteBinding: FragmentFavoriteBinding
 
     @Inject
-    lateinit var factory: ViewModelFactory
+    lateinit var viewModelFactory: ViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFavoriteBinding.inflate(inflater, container, false)
-        return binding.root
+        favoriteBinding = FragmentFavoriteBinding.inflate(inflater, container, false)
+        return favoriteBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         context?.let { setupViewPager(it) }
-        viewModel = ViewModelProvider(this@FavoriteFragment, factory)[FavoriteViewModel::class.java]
+        viewModel = ViewModelProvider(this@FavoriteFragment, viewModelFactory)[FavoriteViewModel::class.java]
     }
 
     private fun setupViewPager(context: Context) {
         val sectionPagerAdapter = SectionPagerAdapter(context, childFragmentManager)
-        binding.favoriteViewPager.adapter = sectionPagerAdapter
-        binding.favoriteTabLayout.setupWithViewPager(binding.favoriteViewPager)
+        favoriteBinding.favoriteViewPager.adapter = sectionPagerAdapter
+        favoriteBinding.favoriteTabLayout.setupWithViewPager(favoriteBinding.favoriteViewPager)
     }
 }

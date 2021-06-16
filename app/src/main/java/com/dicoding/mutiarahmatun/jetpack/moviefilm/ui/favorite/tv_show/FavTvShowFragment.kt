@@ -9,6 +9,7 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.R
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvShowEntity
@@ -25,16 +26,16 @@ import javax.inject.Inject
 class FavTvShowFragment : DaggerFragment(), TvShowCallback {
 
     private lateinit var favoriteViewModel: FavoriteViewModel
-    private lateinit var binding: FragmentFavTvShowBinding
+    private lateinit var tvShowBinding: FragmentFavTvShowBinding
 
     @Inject
-    lateinit var factory: ViewModelFactory
+    lateinit var viewModelFactory: ViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        binding = FragmentFavTvShowBinding.inflate(inflater, container, false)
-        return binding.root
+        tvShowBinding = FragmentFavTvShowBinding.inflate(inflater, container, false)
+        return tvShowBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -42,7 +43,7 @@ class FavTvShowFragment : DaggerFragment(), TvShowCallback {
         setupRecyclerView()
 
         parentFragment?.let {
-            favoriteViewModel = ViewModelProvider(it, factory)[FavoriteViewModel::class.java]
+            favoriteViewModel = ViewModelProvider(it, viewModelFactory)[FavoriteViewModel::class.java]
         }
         observeFavoriteTvShow()
 
@@ -51,14 +52,14 @@ class FavTvShowFragment : DaggerFragment(), TvShowCallback {
     private fun observeFavoriteTvShow() {
         favoriteViewModel.getListFavoriteTvShow().observe(viewLifecycleOwner, Observer {
             if (it != null){
-                binding.rvFavTvShow.adapter?.let {adapter ->
+                tvShowBinding.rvFavTvShow.adapter?.let { adapter ->
                     when (adapter) {
                         is TvShowAdapter -> {
                             if (it.isNullOrEmpty()){
-                                binding.rvFavTvShow.visibility = GONE
+                                tvShowBinding.rvFavTvShow.visibility = GONE
                                 enableEmptyStateEmptyFavoriteTvShow()
                             } else {
-                                binding.rvFavTvShow.visibility = VISIBLE
+                                tvShowBinding.rvFavTvShow.visibility = VISIBLE
                                 adapter.submitList(it)
                                 adapter.notifyDataSetChanged()
                             }
@@ -70,29 +71,29 @@ class FavTvShowFragment : DaggerFragment(), TvShowCallback {
     }
 
     private fun setupRecyclerView() {
-        binding.rvFavTvShow.apply {
-            layoutManager = LinearLayoutManager(context)
+        tvShowBinding.rvFavTvShow.apply {
+            layoutManager = GridLayoutManager(context, 2)
             adapter = TvShowAdapter(this@FavTvShowFragment)
         }
     }
 
     private fun enableEmptyStateEmptyFavoriteTvShow() {
-        binding.favTvShowEmptyState.imgEmptyState.setImageResource(R.drawable.ic_empty_state_favorite)
-        binding.favTvShowEmptyState.imgEmptyState.contentDescription =
+        tvShowBinding.favTvShowEmptyState.imgEmptyState.setImageResource(R.drawable.ic_empty_state_favorite)
+        tvShowBinding.favTvShowEmptyState.imgEmptyState.contentDescription =
             resources.getString(R.string.empty_favorite_tv_show_list)
-        binding.favTvShowEmptyState.titleEmptyState.text = resources.getString(R.string.empty_favorite)
-        binding.favTvShowEmptyState.descEmptyState.text =
+        tvShowBinding.favTvShowEmptyState.titleEmptyState.text = resources.getString(R.string.empty_favorite)
+        tvShowBinding.favTvShowEmptyState.descEmptyState.text =
             resources.getString(R.string.empty_favorite_tv_show_list)
-        binding.favTvShowEmptyState.emptyState.visibility = VISIBLE
+        tvShowBinding.favTvShowEmptyState.emptyState.visibility = VISIBLE
     }
 
-    override fun onItemClicked(data: TvShowEntity) {
+    override fun onItemClicked(tvShowEntity: TvShowEntity) {
         startActivity(
             Intent(
                 context,
                 DetailFilmActivity::class.java
             )
-                .putExtra(DetailFilmActivity.EXTRA_DATA, data.tvShowId)
+                .putExtra(DetailFilmActivity.EXTRA_DATA, tvShowEntity.tvShowId)
                 .putExtra(DetailFilmActivity.EXTRA_TYPE, Constants.TYPE_TV_SHOW)
         )
     }

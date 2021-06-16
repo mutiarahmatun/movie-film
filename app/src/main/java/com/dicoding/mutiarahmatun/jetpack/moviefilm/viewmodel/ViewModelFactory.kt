@@ -8,20 +8,26 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.FavoriteViewMode
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home.HomeViewModel
 import javax.inject.Inject
 
-class ViewModelFactory @Inject constructor(private val mCatalogRepository: CatalogRepository): ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory @Inject constructor(
+        private val mCatalogRepository: CatalogRepository):
+        ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
+
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(mCatalogRepository) as T
             }
+
             modelClass.isAssignableFrom(DetailFilmViewModel::class.java) -> {
                 DetailFilmViewModel(mCatalogRepository) as T
             }
+
             modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
                 FavoriteViewModel(mCatalogRepository) as T
             }
+
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
 

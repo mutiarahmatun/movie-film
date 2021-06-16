@@ -53,7 +53,7 @@ class TvShowFragment : DaggerFragment(), TvShowCallback {
             setupViewModel(it)
         }
 
-        viewModelHome.getListOnTheAirTvShows().observe(viewLifecycleOwner, Observer { listTvShow ->
+        viewModelHome.getListOnTheAirTvShows().observe(viewLifecycleOwner, { listTvShow ->
             if (listTvShow != null) {
                 when (listTvShow.status) {
                     Status.LOADING -> tvShowBinding.progressBar.progressBar.visibility = View.VISIBLE

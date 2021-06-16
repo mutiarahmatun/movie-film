@@ -30,9 +30,10 @@ class DetailFilmActivity : DaggerAppCompatActivity() {
     private lateinit var viewModel: DetailFilmViewModel
 
     @Inject
-    lateinit var factory: ViewModelFactory
+    lateinit var viewModelFactory: ViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         detailFilmBinding = ActivityDetailFilmBinding.inflate(layoutInflater)
         setContentView(detailFilmBinding.root)
@@ -68,14 +69,12 @@ class DetailFilmActivity : DaggerAppCompatActivity() {
     private fun setupViewModel() {
         viewModel = ViewModelProvider(
                 this@DetailFilmActivity,
-                factory
+                viewModelFactory
         )[DetailFilmViewModel::class.java]
     }
 
     private fun displayData(movie: MovieEntity?, tvShow: TvShowEntity?) {
         val urlImage = movie?.imgPoster ?: tvShow?.imgPoster
-        Log.d("ini adalah movie", "${movie}")
-        Log.d("ini adalah tv shoew", "${tvShow}")
         val urlHighlight = movie?.imgBackground ?: tvShow?.imgBackground
         val statusFavorite = movie?.isFavorite ?: tvShow?.isFavorite
 
@@ -84,7 +83,9 @@ class DetailFilmActivity : DaggerAppCompatActivity() {
         detailFilmBinding.tvReleaseYear.text = movie?.releaseYear ?: tvShow?.releaseYear
 
         detailFilmBinding.imgShare.setOnClickListener{
+
             val intent= Intent()
+
             intent.action=Intent.ACTION_SEND
             intent.putExtra(Intent.EXTRA_TEXT,resources.getString(R.string.share_text, detailFilmBinding.tvTitle.text))
             intent.type="text/plain"
@@ -99,6 +100,7 @@ class DetailFilmActivity : DaggerAppCompatActivity() {
                 BuildConfig.BASE_URL_IMAGE_TMDB +
                 Constants.ENDPOINT_POSTER_SIZE_W185 +
                         urlImage)
+
         detailFilmBinding.imgItemPreview.loadFromUrl(
                 BuildConfig.BASE_URL_IMAGE_TMDB +
                         Constants.ENDPOINT_POSTER_SIZE_W780 +
@@ -125,25 +127,22 @@ class DetailFilmActivity : DaggerAppCompatActivity() {
     private fun setFavorite(movie: MovieEntity?, tvShow: TvShowEntity?) {
         if (movie != null) {
             if (movie.isFavorite){
-                showSnackBar("${movie.title} Removed from favorite")
+                showSnackBar("${movie.title} Removed from favorite movie")
             }else {
-                showSnackBar("${movie.title} Added to favorite")
+                showSnackBar("${movie.title} Added to favorite movie")
             }
             viewModel.setFavoriteMovie(movie)
+
         } else {
             if (tvShow != null) {
                 if (tvShow.isFavorite){
-                    showSnackBar("${tvShow.title} Aemoved from favorite")
+                    showSnackBar("${tvShow.title} Removed from favorite TV show")
                 }else {
-                    showSnackBar("${tvShow.title} Removed from favorite")
+                    showSnackBar("${tvShow.title} Added from favorite TV show")
                 }
                 viewModel.setFavoriteTvShow(tvShow)
             }
         }
-    }
-
-    private fun setupToolbarTitle(title: String) {
-        supportActionBar?.title = title
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -13,7 +13,7 @@
     <string name="no_connection">No Internet Connection</string>
     <string name="empty_favorite">No favorites yet</string>
     <string name="empty_favorite_movie_list">You don\'t have a list of favorite movie.</string>
-    <string name="empty_favorite_tv_show_list">You don\'t have a list of favorite movie.</string>
+    <string name="empty_favorite_tv_show_list">You don\'t have a list of favorite tv show.</string>
 
     <string name="toolbar_title_movie">Now Playing Movie</string>
     <string name="toolbar_title_tv_show">TV Show On The Air</string>

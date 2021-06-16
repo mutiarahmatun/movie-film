@@ -10,7 +10,7 @@ fun ImageView.loadFromUrl(path: String) {
     Glide.with(this)
         .setDefaultRequestOptions(
             RequestOptions()
-            .placeholder(R.drawable.ic_movie)
-            .error(R.drawable.ic_movie)
+            .placeholder(R.drawable.logo_mf)
+            .error(R.drawable.logo_mf)
         ).load(path).into(this)
 }

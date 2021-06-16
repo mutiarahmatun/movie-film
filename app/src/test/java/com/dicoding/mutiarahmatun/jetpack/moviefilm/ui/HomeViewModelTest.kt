@@ -3,9 +3,13 @@ package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.CatalogRepository
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvShowEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home.HomeViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.DataDummy
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.vo.Resource
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -15,13 +19,12 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class HomeViewModelTest {
 
-    private val dummyMovie = DataDummy.generateDataMovieDummy()
-    private val dummyTvShow = DataDummy.generateDataTvShowDummy()
     private lateinit var viewModel: HomeViewModel
 
     @get:Rule
@@ -31,7 +34,16 @@ class HomeViewModelTest {
     private lateinit var catalogRepository: CatalogRepository
 
     @Mock
-    private lateinit var observer: Observer<List<FilmEntity>>
+    private lateinit var observerMovie: Observer<Resource<PagedList<MovieEntity>>>
+
+    @Mock
+    private lateinit var observerTvShow: Observer<Resource<PagedList<TvShowEntity>>>
+
+    @Mock
+    private lateinit var moviePagedList: PagedList<MovieEntity>
+
+    @Mock
+    private lateinit var tvShowPagedList: PagedList<TvShowEntity>
 
     @Before
     fun setUp() {
@@ -40,35 +52,36 @@ class HomeViewModelTest {
 
     @Test
     fun getListNowPlayingMovies() {
-        val movie = MutableLiveData<List<FilmEntity>>()
+        val dummyMovie = Resource.success(moviePagedList)
+        `when`(dummyMovie.data?.size).thenReturn(5)
+        val movie = MutableLiveData<Resource<PagedList<MovieEntity>>>()
         movie.value = dummyMovie
 
-        Mockito.`when`(catalogRepository.getNowPlayingMovies()).thenReturn(movie)
-
-        val dataListMovie = viewModel.getListNowPlayingMovies().value
-
+        `when`(catalogRepository.getNowPlayingMovies()).thenReturn(movie)
+        val movieEntity = viewModel.getListNowPlayingMovies().value?.data
         verify(catalogRepository).getNowPlayingMovies()
-        assertNotNull(dataListMovie)
-        assertEquals(10, dataListMovie?.size)
+        assertNotNull(movieEntity)
+        assertEquals(5, movieEntity?.size)
 
-        viewModel.getListNowPlayingMovies().observeForever(observer)
-        verify(observer).onChanged(dummyMovie)
+        viewModel.getListNowPlayingMovies().observeForever(observerMovie)
+        Mockito.verify(observerMovie).onChanged(dummyMovie)
     }
 
     @Test
     fun getListOnTheAirTvShows() {
-        val tvShow = MutableLiveData<List<FilmEntity>>()
+        val dummyTvShow = Resource.success(tvShowPagedList)
+        `when`(dummyTvShow.data?.size).thenReturn(5)
+
+        val tvShow = MutableLiveData<Resource<PagedList<TvShowEntity>>>()
         tvShow.value = dummyTvShow
 
-        Mockito.`when`(catalogRepository.getTvShowOnTheAir()).thenReturn(tvShow)
-
-        val dataListTvShow = viewModel.getListOnTheAirTvShows().value
-
+        `when`(catalogRepository.getTvShowOnTheAir()).thenReturn(tvShow)
+        val tvShowEntity = viewModel.getListOnTheAirTvShows().value?.data
         verify(catalogRepository).getTvShowOnTheAir()
-        assertNotNull(dataListTvShow)
-        assertEquals(10, dataListTvShow?.size)
+        assertNotNull(tvShowEntity)
+        assertEquals(5, tvShowEntity?.size)
 
-        viewModel.getListOnTheAirTvShows().observeForever(observer)
-        verify(observer).onChanged(dummyTvShow)
+        viewModel.getListOnTheAirTvShows().observeForever(observerTvShow)
+        Mockito.verify(observerTvShow).onChanged(dummyTvShow)
     }
 }

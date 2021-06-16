@@ -9,6 +9,7 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.R
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
@@ -25,16 +26,16 @@ import javax.inject.Inject
 class FavMovieFragment : DaggerFragment(), MovieCallback {
 
     private lateinit var favoriteViewModel: FavoriteViewModel
-    private lateinit var binding: FragmentFavMovieBinding
+    private lateinit var favMovieBinding: FragmentFavMovieBinding
 
     @Inject
-    lateinit var factory: ViewModelFactory
+    lateinit var viewModelFactory: ViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        binding = FragmentFavMovieBinding.inflate(inflater, container, false)
-        return binding.root
+        favMovieBinding = FragmentFavMovieBinding.inflate(inflater, container, false)
+        return favMovieBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -42,7 +43,7 @@ class FavMovieFragment : DaggerFragment(), MovieCallback {
         setupRecyclerView()
 
         parentFragment?.let {
-            favoriteViewModel = ViewModelProvider(it, factory)[FavoriteViewModel::class.java]
+            favoriteViewModel = ViewModelProvider(it, viewModelFactory)[FavoriteViewModel::class.java]
         }
         observeFavoriteMovies()
 
@@ -51,14 +52,14 @@ class FavMovieFragment : DaggerFragment(), MovieCallback {
     private fun observeFavoriteMovies() {
         favoriteViewModel.getListFavoriteMovie().observe(viewLifecycleOwner, Observer {
             if (it != null){
-                binding.rvFavMovie.adapter?.let {adapter ->
+                favMovieBinding.rvFavMovie.adapter?.let { adapter ->
                     when (adapter) {
                         is MovieAdapter -> {
                             if (it.isNullOrEmpty()){
-                                binding.rvFavMovie.visibility = GONE
+                                favMovieBinding.rvFavMovie.visibility = GONE
                                 enableEmptyStateEmptyFavoriteMovie()
                             } else {
-                                binding.rvFavMovie.visibility = VISIBLE
+                                favMovieBinding.rvFavMovie.visibility = VISIBLE
                                 adapter.submitList(it)
                                 adapter.notifyDataSetChanged()
                             }
@@ -69,30 +70,30 @@ class FavMovieFragment : DaggerFragment(), MovieCallback {
         })
     }
     private fun setupRecyclerView() {
-        binding.rvFavMovie.apply {
-            layoutManager = LinearLayoutManager(context)
+        favMovieBinding.rvFavMovie.apply {
+            layoutManager = GridLayoutManager(context, 2)
             adapter = MovieAdapter(this@FavMovieFragment)
         }
     }
 
     private fun enableEmptyStateEmptyFavoriteMovie() {
 
-        binding.favMovieEmptyState.imgEmptyState.setImageResource(R.drawable.ic_empty_state_favorite)
-        binding.favMovieEmptyState.imgEmptyState.contentDescription =
+        favMovieBinding.favMovieEmptyState.imgEmptyState.setImageResource(R.drawable.ic_empty_state_favorite)
+        favMovieBinding.favMovieEmptyState.imgEmptyState.contentDescription =
             resources.getString(R.string.empty_favorite_movie_list)
-        binding.favMovieEmptyState.titleEmptyState.text = resources.getString(R.string.empty_favorite)
-        binding.favMovieEmptyState.descEmptyState.text =
+        favMovieBinding.favMovieEmptyState.titleEmptyState.text = resources.getString(R.string.empty_favorite)
+        favMovieBinding.favMovieEmptyState.descEmptyState.text =
             resources.getString(R.string.empty_favorite_movie_list)
-        binding.favMovieEmptyState.emptyState.visibility = VISIBLE
+        favMovieBinding.favMovieEmptyState.emptyState.visibility = VISIBLE
     }
 
-    override fun onItemClicked(data: MovieEntity) {
+    override fun onItemClicked(movieEntity: MovieEntity) {
         startActivity(
             Intent(
                 context,
                 DetailFilmActivity::class.java
             )
-                .putExtra(DetailFilmActivity.EXTRA_DATA, data.movieId)
+                .putExtra(DetailFilmActivity.EXTRA_DATA, movieEntity.movieId)
                 .putExtra(DetailFilmActivity.EXTRA_TYPE, Constants.TYPE_MOVIE)
         )
     }

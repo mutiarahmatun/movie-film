@@ -49,7 +49,7 @@ class MovieFragment : DaggerFragment(), MovieCallback {
             setupViewModel(it)
         }
 
-        viewModelHome.getListNowPlayingMovies().observe(viewLifecycleOwner, Observer { listMovie ->
+        viewModelHome.getListNowPlayingMovies().observe(viewLifecycleOwner, { listMovie ->
             if (listMovie != null) {
                 when (listMovie.status) {
                     Status.LOADING -> movieBinding.progressBar.progressBar.visibility = View.VISIBLE
@@ -81,10 +81,10 @@ class MovieFragment : DaggerFragment(), MovieCallback {
         }
     }
 
-    override fun onItemClicked(data: MovieEntity) {
+    override fun onItemClicked(movieEntity: MovieEntity) {
         startActivity(
                 Intent(context, DetailFilmActivity::class.java)
-                        .putExtra(DetailFilmActivity.EXTRA_DATA, data.movieId)
+                        .putExtra(DetailFilmActivity.EXTRA_DATA, movieEntity.movieId)
                         .putExtra(DetailFilmActivity.EXTRA_TYPE, TYPE_MOVIE)
         )
     }

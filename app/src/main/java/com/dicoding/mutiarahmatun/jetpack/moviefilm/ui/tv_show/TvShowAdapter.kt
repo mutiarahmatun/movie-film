@@ -11,7 +11,7 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.ItemMovieFilmBin
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.loadFromUrl
 
-class TvShowAdapter (private val callback: TvShowCallback) :
+class TvShowAdapter (private val tvShowCallback: TvShowCallback) :
     PagedListAdapter<TvShowEntity, TvShowAdapter.ListViewHolder>(DIFF_CALLBACK) {
 
     companion object {
@@ -47,7 +47,7 @@ class TvShowAdapter (private val callback: TvShowCallback) :
                     imgItemPhoto.loadFromUrl(BuildConfig.BASE_URL_IMAGE_TMDB + Constants.ENDPOINT_POSTER_SIZE_W185 + it)
                 }
 
-                itemFilm.setOnClickListener { callback?.onItemClicked(tvShowEntity) }
+                itemFilm.setOnClickListener { tvShowCallback?.onItemClicked(tvShowEntity) }
             }
         }
     }
