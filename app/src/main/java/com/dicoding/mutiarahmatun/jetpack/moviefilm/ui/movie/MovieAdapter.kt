@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.BuildConfig
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.ItemMovieFilmBinding
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.loadFromUrl
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.loadFromUrl
 
 class MovieAdapter (private val movieCallback: MovieCallback) :
     PagedListAdapter<MovieEntity, MovieAdapter.ListViewHolder>(DIFF_CALLBACK) {
@@ -44,7 +44,7 @@ class MovieAdapter (private val movieCallback: MovieCallback) :
         fun bind(data: MovieEntity) {
             with(viewBinding) {
                 data.imgPoster?.let {
-                    imgItemPhoto.loadFromUrl(BuildConfig.BASE_URL_IMAGE_TMDB + Constants.ENDPOINT_POSTER_SIZE_W185 + it)
+                    imgItemPhoto.loadFromUrl(BuildConfig.BASE_URL_IMAGE_TMDB + ObjectFilmHelper.ENDPOINT_POSTER_SIZE_W185 + it)
                 }
                 tvTitle.text = data.title
 

@@ -7,16 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvShowEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.FragmentTvShowBinding
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmActivity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home.HomeViewModel
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants.TYPE_TV_SHOW
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_TV_SHOW
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.vo.Status
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.valueobject.IndicatorStatus
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -55,9 +54,9 @@ class TvShowFragment : DaggerFragment(), TvShowCallback {
 
         viewModelHome.getListOnTheAirTvShows().observe(viewLifecycleOwner, { listTvShow ->
             if (listTvShow != null) {
-                when (listTvShow.status) {
-                    Status.LOADING -> tvShowBinding.progressBar.progressBar.visibility = View.VISIBLE
-                    Status.SUCCESS -> {
+                when (listTvShow.indicatorStatus) {
+                    IndicatorStatus.LOADING -> tvShowBinding.progressBar.progressBar.visibility = View.VISIBLE
+                    IndicatorStatus.SUCCESS -> {
                         tvShowBinding.progressBar.progressBar.visibility = View.GONE
                         tvShowBinding.rvTvShow.adapter?.let { adapter ->
                             when (adapter) {
@@ -68,7 +67,7 @@ class TvShowFragment : DaggerFragment(), TvShowCallback {
                             }
                         }
                     }
-                    Status.ERROR -> {
+                    IndicatorStatus.ERROR -> {
                         tvShowBinding.progressBar.progressBar.visibility = View.GONE
                         Toast.makeText(context, "Check your internet connection", Toast.LENGTH_SHORT).show()
                     }

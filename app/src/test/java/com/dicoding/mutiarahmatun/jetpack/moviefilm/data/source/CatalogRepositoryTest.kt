@@ -11,17 +11,12 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.Mov
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvShowEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.RemoteDataSource
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.DataDummy
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.vo.Resource
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.doAnswer
-import com.nhaarman.mockitokotlin2.eq
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.valueobject.Resource
 import com.nhaarman.mockitokotlin2.verify
-import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 

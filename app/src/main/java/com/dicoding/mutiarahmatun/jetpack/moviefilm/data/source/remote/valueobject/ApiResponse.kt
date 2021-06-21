@@ -1,4 +1,4 @@
-package com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.vo
+package com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.valueobject
 
 class ApiResponse<T>(val status: StatusResponse, val body: T?, val message: String?) {
     companion object {

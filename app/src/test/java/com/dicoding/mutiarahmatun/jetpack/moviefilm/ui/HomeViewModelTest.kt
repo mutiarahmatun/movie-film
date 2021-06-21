@@ -8,8 +8,7 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.CatalogRepositor
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvShowEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home.HomeViewModel
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.DataDummy
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.vo.Resource
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.valueobject.Resource
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull

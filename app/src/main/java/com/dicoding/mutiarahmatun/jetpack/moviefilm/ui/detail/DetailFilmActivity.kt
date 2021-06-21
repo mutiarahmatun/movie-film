@@ -2,7 +2,6 @@ package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.BuildConfig
@@ -10,10 +9,10 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.R
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvShowEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.ActivityDetailFilmBinding
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants.TYPE_MOVIE
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants.TYPE_TV_SHOW
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.loadFromUrl
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_MOVIE
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_TV_SHOW
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.loadFromUrl
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerAppCompatActivity
@@ -98,12 +97,12 @@ class DetailFilmActivity : DaggerAppCompatActivity() {
 
         detailFilmBinding.imgItemPhoto.loadFromUrl(
                 BuildConfig.BASE_URL_IMAGE_TMDB +
-                Constants.ENDPOINT_POSTER_SIZE_W185 +
+                ObjectFilmHelper.ENDPOINT_POSTER_SIZE_W185 +
                         urlImage)
 
         detailFilmBinding.imgItemPreview.loadFromUrl(
                 BuildConfig.BASE_URL_IMAGE_TMDB +
-                        Constants.ENDPOINT_POSTER_SIZE_W780 +
+                        ObjectFilmHelper.ENDPOINT_POSTER_SIZE_W780 +
                         urlHighlight)
 
         detailFilmBinding.fabFavorite.setOnClickListener {

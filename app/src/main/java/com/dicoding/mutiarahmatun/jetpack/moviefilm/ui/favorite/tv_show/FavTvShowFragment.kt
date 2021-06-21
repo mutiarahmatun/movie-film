@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.R
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvShowEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.FragmentFavTvShowBinding
@@ -18,7 +17,7 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmActivity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.FavoriteViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.tv_show.TvShowAdapter
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.tv_show.TvShowCallback
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -94,7 +93,7 @@ class FavTvShowFragment : DaggerFragment(), TvShowCallback {
                 DetailFilmActivity::class.java
             )
                 .putExtra(DetailFilmActivity.EXTRA_DATA, tvShowEntity.tvShowId)
-                .putExtra(DetailFilmActivity.EXTRA_TYPE, Constants.TYPE_TV_SHOW)
+                .putExtra(DetailFilmActivity.EXTRA_TYPE, ObjectFilmHelper.TYPE_TV_SHOW)
         )
     }
 

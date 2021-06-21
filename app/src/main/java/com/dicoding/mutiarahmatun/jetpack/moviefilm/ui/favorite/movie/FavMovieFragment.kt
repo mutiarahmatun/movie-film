@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.R
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.FragmentFavMovieBinding
@@ -18,7 +17,7 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmActivity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.FavoriteViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.movie.MovieAdapter
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.movie.MovieCallback
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -94,7 +93,7 @@ class FavMovieFragment : DaggerFragment(), MovieCallback {
                 DetailFilmActivity::class.java
             )
                 .putExtra(DetailFilmActivity.EXTRA_DATA, movieEntity.movieId)
-                .putExtra(DetailFilmActivity.EXTRA_TYPE, Constants.TYPE_MOVIE)
+                .putExtra(DetailFilmActivity.EXTRA_TYPE, ObjectFilmHelper.TYPE_MOVIE)
         )
     }
 

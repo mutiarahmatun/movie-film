@@ -6,15 +6,15 @@ import androidx.paging.PagedList
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.CatalogRepository
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvShowEntity
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.vo.Resource
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.valueobject.ResourceData
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
         private val catalogRepository: CatalogRepository)
     : ViewModel() {
 
-    fun getListNowPlayingMovies(): LiveData<Resource<PagedList<MovieEntity>>> = catalogRepository.getNowPlayingMovies()
+    fun getListNowPlayingMovies(): LiveData<ResourceData<PagedList<MovieEntity>>> = catalogRepository.getNowPlayingMovies()
 
-    fun getListOnTheAirTvShows(): LiveData<Resource<PagedList<TvShowEntity>>> = catalogRepository.getTvShowOnTheAir()
+    fun getListOnTheAirTvShows(): LiveData<ResourceData<PagedList<TvShowEntity>>> = catalogRepository.getTvShowOnTheAir()
 
 }

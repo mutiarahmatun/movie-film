@@ -7,16 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.databinding.FragmentMovieBinding
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmActivity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home.HomeViewModel
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.Constants.TYPE_MOVIE
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.ObjectFilmHelper.TYPE_MOVIE
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.vo.Status
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.valueobject.IndicatorStatus
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -51,9 +50,9 @@ class MovieFragment : DaggerFragment(), MovieCallback {
 
         viewModelHome.getListNowPlayingMovies().observe(viewLifecycleOwner, { listMovie ->
             if (listMovie != null) {
-                when (listMovie.status) {
-                    Status.LOADING -> movieBinding.progressBar.progressBar.visibility = View.VISIBLE
-                    Status.SUCCESS -> {
+                when (listMovie.indicatorStatus) {
+                    IndicatorStatus.LOADING -> movieBinding.progressBar.progressBar.visibility = View.VISIBLE
+                    IndicatorStatus.SUCCESS -> {
                         movieBinding.progressBar.progressBar.visibility = View.GONE
                         movieBinding.rvMovie.adapter?.let { adapter ->
                             when (adapter) {
@@ -64,7 +63,7 @@ class MovieFragment : DaggerFragment(), MovieCallback {
                             }
                         }
                     }
-                    Status.ERROR -> {
+                    IndicatorStatus.ERROR -> {
                         movieBinding.progressBar.progressBar.visibility = View.GONE
                         Toast.makeText(context, "Check your internet connection", Toast.LENGTH_SHORT).show()
                     }

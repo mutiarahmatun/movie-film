@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.api.ApiService
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.MovieResponse
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.TvShowResponse
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.vo.ApiResponse
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.valueobject.ApiResponse
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.EspressoIdlingResource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO

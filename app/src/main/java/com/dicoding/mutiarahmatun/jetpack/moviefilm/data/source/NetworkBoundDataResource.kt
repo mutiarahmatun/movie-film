@@ -1,24 +1,22 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.vo.ApiResponse
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.vo.StatusResponse
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.vo.Resource
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.valueobject.ApiResponse
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.valueobject.StatusResponse
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.valueobject.ResourceData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+abstract class NetworkBoundDataResource<ResultType, RequestType> {
 
-abstract class NetworkBoundResource<ResultType, RequestType> {
-
-    private val result = MediatorLiveData<Resource<ResultType>>()
+    private val result = MediatorLiveData<ResourceData<ResultType>>()
 
     init {
-        result.value = Resource.loading(null)
+        result.value = ResourceData.loading(null)
 
         @Suppress("LeakingThis")
         val dbSource = loadFromDB()
@@ -31,7 +29,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                 fetchFromNetwork(dbSource)
             } else {
                 result.addSource(dbSource) { newData ->
-                    result.value = Resource.success(newData)
+                    result.value = ResourceData.success(newData)
                 }
             }
         }
@@ -51,7 +49,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
         val apiResponse = createCall()
 
         result.addSource(dbSource) { newData ->
-            result.value = Resource.loading(newData)
+            result.value = ResourceData.loading(newData)
         }
 
         result.addSource(apiResponse) { response ->
@@ -65,7 +63,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
                         withContext(Main) {
                             result.addSource(loadFromDB()) { newData ->
-                                result.value = Resource.success(newData)
+                                result.value = ResourceData.success(newData)
                             }
                         }
 
@@ -75,12 +73,12 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                     onFetchFailed()
 
                     result.addSource(dbSource) { newData ->
-                        result.value = Resource.error(response.message, newData)
+                        result.value = ResourceData.error(response.message, newData)
                     }
                 }
             }
         }
     }
 
-    fun asLiveData(): LiveData<Resource<ResultType>> = result
+    fun asLiveData(): LiveData<ResourceData<ResultType>> = result
 }

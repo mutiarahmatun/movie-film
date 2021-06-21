@@ -9,8 +9,8 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvS
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.RemoteDataSource
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.MovieResponse
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.TvShowResponse
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.vo.ApiResponse
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.vo.Resource
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.valueobject.ApiResponse
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.valueobject.ResourceData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -23,9 +23,9 @@ class CatalogRepository @Inject constructor(
 
     ) : CatalogDataSource {
 
-    override fun getNowPlayingMovies(): LiveData<Resource<PagedList<MovieEntity>>> {
+    override fun getNowPlayingMovies(): LiveData<ResourceData<PagedList<MovieEntity>>> {
 
-        return object : NetworkBoundResource<PagedList<MovieEntity>, List<MovieResponse>>() {
+        return object : NetworkBoundDataResource<PagedList<MovieEntity>, List<MovieResponse>>() {
 
             public override fun loadFromDB(): LiveData<PagedList<MovieEntity>> {
 
@@ -84,9 +84,9 @@ class CatalogRepository @Inject constructor(
         localDataSource.getDetailMovie(movieId)
 
 
-    override fun getTvShowOnTheAir(): LiveData<Resource<PagedList<TvShowEntity>>> {
+    override fun getTvShowOnTheAir(): LiveData<ResourceData<PagedList<TvShowEntity>>> {
 
-        return object : NetworkBoundResource<PagedList<TvShowEntity>, List<TvShowResponse>>() {
+        return object : NetworkBoundDataResource<PagedList<TvShowEntity>, List<TvShowResponse>>() {
 
             public override fun loadFromDB(): LiveData<PagedList<TvShowEntity>> {
 
