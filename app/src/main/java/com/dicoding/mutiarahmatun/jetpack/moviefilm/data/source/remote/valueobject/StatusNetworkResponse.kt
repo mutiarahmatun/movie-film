@@ -1,6 +1,7 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.valueobject
 
-enum class StatusResponse {
+enum class StatusNetworkResponse {
     SUCCESS,
-    ERROR
+    ERROR,
+    EMPTY
 }

@@ -6,19 +6,19 @@ import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.Mov
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvShowEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.valueobject.ResourceData
 
-interface CatalogDataSource {
+interface MovieFilmDataSource {
 
     fun getNowPlayingMovies(): LiveData<ResourceData<PagedList<MovieEntity>>>
 
-    fun getListFavoriteMovies(): LiveData<PagedList<MovieEntity>>
-
-    fun getMovieDetail(movieId: Int): LiveData<MovieEntity>
-
     fun getTvShowOnTheAir(): LiveData<ResourceData<PagedList<TvShowEntity>>>
+
+    fun getListFavoriteMovies(): LiveData<PagedList<MovieEntity>>
 
     fun getListFavoriteTvShows(): LiveData<PagedList<TvShowEntity>>
 
-    fun getTvShowDetail(tvShowId: Int): LiveData<TvShowEntity>
+    fun getDetailMovie(movieId: Int): LiveData<MovieEntity>
+
+    fun getDetailTvShow(tvShowId: Int): LiveData<TvShowEntity>
 
     fun setFavoriteMovie(movie: MovieEntity)
 

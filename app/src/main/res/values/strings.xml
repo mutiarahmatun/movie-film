@@ -12,13 +12,13 @@
     <string name="favorite">Favorite</string>
     <string name="no_connection">No Internet Connection</string>
     <string name="empty_favorite">No favorites yet</string>
-    <string name="empty_favorite_movie_list">You don\'t have a list of favorite movie.</string>
-    <string name="empty_favorite_tv_show_list">You don\'t have a list of favorite tv show.</string>
+    <string name="empty_favorite_movie_list">You don\'t have favorite movie.</string>
+    <string name="empty_favorite_tv_show_list">You don\'t have favorite tv show.</string>
 
     <string name="toolbar_title_movie">Now Playing Movie</string>
     <string name="toolbar_title_tv_show">TV Show On The Air</string>
     <string name="floating_button">floating button</string>
-    <string name="tab_title_movie">List Movie</string>
-    <string name="tab_title_tv_show">List TV Show</string>
+    <string name="tab_title_movie">Favorite Movie</string>
+    <string name="tab_title_tv_show">Favorite TV Show</string>
     <string name="tab_title_favorite">Favorite</string>
 </resources>

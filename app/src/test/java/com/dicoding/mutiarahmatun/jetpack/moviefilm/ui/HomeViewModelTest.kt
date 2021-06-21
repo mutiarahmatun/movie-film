@@ -4,11 +4,11 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.CatalogRepository
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.MovieFilmRepository
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvShowEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home.HomeViewModel
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.valueobject.Resource
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.valueobject.ResourceData
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -30,13 +30,13 @@ class HomeViewModelTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Mock
-    private lateinit var catalogRepository: CatalogRepository
+    private lateinit var catalogRepository: MovieFilmRepository
 
     @Mock
-    private lateinit var observerMovie: Observer<Resource<PagedList<MovieEntity>>>
+    private lateinit var observerMovie: Observer<ResourceData<PagedList<MovieEntity>>>
 
     @Mock
-    private lateinit var observerTvShow: Observer<Resource<PagedList<TvShowEntity>>>
+    private lateinit var observerTvShow: Observer<ResourceData<PagedList<TvShowEntity>>>
 
     @Mock
     private lateinit var moviePagedList: PagedList<MovieEntity>
@@ -51,9 +51,9 @@ class HomeViewModelTest {
 
     @Test
     fun getListNowPlayingMovies() {
-        val dummyMovie = Resource.success(moviePagedList)
+        val dummyMovie = ResourceData.success(moviePagedList)
         `when`(dummyMovie.data?.size).thenReturn(5)
-        val movie = MutableLiveData<Resource<PagedList<MovieEntity>>>()
+        val movie = MutableLiveData<ResourceData<PagedList<MovieEntity>>>()
         movie.value = dummyMovie
 
         `when`(catalogRepository.getNowPlayingMovies()).thenReturn(movie)
@@ -68,10 +68,10 @@ class HomeViewModelTest {
 
     @Test
     fun getListOnTheAirTvShows() {
-        val dummyTvShow = Resource.success(tvShowPagedList)
+        val dummyTvShow = ResourceData.success(tvShowPagedList)
         `when`(dummyTvShow.data?.size).thenReturn(5)
 
-        val tvShow = MutableLiveData<Resource<PagedList<TvShowEntity>>>()
+        val tvShow = MutableLiveData<ResourceData<PagedList<TvShowEntity>>>()
         tvShow.value = dummyTvShow
 
         `when`(catalogRepository.getTvShowOnTheAir()).thenReturn(tvShow)

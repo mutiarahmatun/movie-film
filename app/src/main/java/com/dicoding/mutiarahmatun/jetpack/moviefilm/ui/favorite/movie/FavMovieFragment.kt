@@ -68,6 +68,7 @@ class FavMovieFragment : DaggerFragment(), MovieCallback {
             }
         })
     }
+
     private fun setupRecyclerView() {
         favMovieBinding.rvFavMovie.apply {
             layoutManager = GridLayoutManager(context, 2)

@@ -3,7 +3,7 @@ package com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.CatalogRepository
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.MovieFilmRepository
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvShowEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.DataDummy
@@ -31,7 +31,7 @@ class DetailHomeViewModelTest {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Mock
-    private lateinit var catalogRepository: CatalogRepository
+    private lateinit var catalogRepository: MovieFilmRepository
 
     @Mock
     private lateinit var observerMovie: Observer<MovieEntity>
@@ -49,12 +49,11 @@ class DetailHomeViewModelTest {
         val movieDummy = MutableLiveData<MovieEntity>()
         movieDummy.value = dummyMovie
 
-        Mockito.`when`(catalogRepository.getMovieDetail(movieId)).thenReturn(movieDummy)
+        Mockito.`when`(catalogRepository.getDetailMovie(movieId)).thenReturn(movieDummy)
 
         val movieData = viewModel.getMovieDetail(movieId).value
 
         assertNotNull(movieData)
-        assertEquals(dummyMovie.id, movieData?.id)
         assertEquals(dummyMovie.movieId, movieData?.movieId)
         assertEquals(dummyMovie.title, movieData?.title)
         assertEquals(dummyMovie.description, movieData?.description)
@@ -72,12 +71,11 @@ class DetailHomeViewModelTest {
         val tvShowDummy = MutableLiveData<TvShowEntity>()
         tvShowDummy.value = dummyTvShow
 
-        Mockito.`when`(catalogRepository.getTvShowDetail(tvShowId)).thenReturn(tvShowDummy)
+        Mockito.`when`(catalogRepository.getDetailTvShow(tvShowId)).thenReturn(tvShowDummy)
 
         val tvShowData = viewModel.getTvShowDetail(tvShowId).value
 
         assertNotNull(tvShowData)
-        assertEquals(dummyTvShow.id, tvShowData?.id)
         assertEquals(dummyTvShow.tvShowId, tvShowData?.tvShowId)
         assertEquals(dummyTvShow.title, tvShowData?.title)
         assertEquals(dummyTvShow.description, tvShowData?.description)

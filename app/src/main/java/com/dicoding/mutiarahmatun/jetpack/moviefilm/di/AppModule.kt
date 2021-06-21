@@ -1,12 +1,13 @@
 package com.dicoding.mutiarahmatun.jetpack.moviefilm.di
 
 import android.app.Application
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.CatalogRepository
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.MovieFilmRepository
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.LocalDataSource
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.room.CatalogDao
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.room.CatalogDatabase
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.room.MovieFilmDao
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.room.MovieFilmBuilderDatabase
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.RemoteDataSource
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.api.ApiService
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.AppThreadExecutors
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel.ViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -19,18 +20,18 @@ class AppModule {
 
         @Singleton
         @Provides
-        fun provideCatalogDatabase(application: Application): CatalogDatabase =
-            CatalogDatabase.getInstance(application)
+        fun provideMovieFilmBuilderDatabase(application: Application): MovieFilmBuilderDatabase =
+            MovieFilmBuilderDatabase.getInstance(application)
 
         @Singleton
         @Provides
-        fun provideCatalogDao(catalogDatabase: CatalogDatabase): CatalogDao =
-            catalogDatabase.catalogDao()
+        fun provideMovieFilmDao(movieFilmBuilderDatabase: MovieFilmBuilderDatabase): MovieFilmDao =
+            movieFilmBuilderDatabase.movieFilmDao()
 
         @Singleton
         @Provides
-        fun provideLocalDataSource(catalogDao: CatalogDao): LocalDataSource =
-            LocalDataSource(catalogDao)
+        fun provideLocalDataSource(movieFilmDao: MovieFilmDao): LocalDataSource =
+            LocalDataSource(movieFilmDao)
 
         @Singleton
         @Provides
@@ -39,14 +40,14 @@ class AppModule {
 
         @Singleton
         @Provides
-        fun provideCatalogRepository(
+        fun provideMovieFilmRepository(
             remoteDataSource: RemoteDataSource,
             localDataSource: LocalDataSource
-        ): CatalogRepository = CatalogRepository(remoteDataSource, localDataSource)
+        ): MovieFilmRepository = MovieFilmRepository(remoteDataSource, localDataSource)
 
         @Singleton
         @Provides
-        fun provideViewModelFactory(catalogRepository: CatalogRepository): ViewModelFactory =
+        fun provideViewModelFactory(catalogRepository: MovieFilmRepository): ViewModelFactory =
             ViewModelFactory(catalogRepository)
 
     }

@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class FavoriteFragmentBuildersModule {
+abstract class FavFragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeFavoriteMovieFragment() : FavMovieFragment

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.api.ApiService
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.MovieResponse
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.response.TvShowResponse
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.valueobject.ApiResponse
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.remote.valueobject.NetworkApiResponse
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.utils.EspressoIdlingResource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -14,27 +14,28 @@ import okio.IOException
 import retrofit2.await
 import javax.inject.Inject
 
-class RemoteDataSource @Inject constructor(private val catalogApiService: ApiService) {
+class RemoteDataSource @Inject constructor(
+        private val catalogApiService: ApiService) {
 
-    fun getNowPlayingMovies(): LiveData<ApiResponse<List<MovieResponse>>> {
+    fun getNowPlayingMovies(): LiveData<NetworkApiResponse<List<MovieResponse>>> {
 
         EspressoIdlingResource.increment()
 
-        val resultMovieResponse = MutableLiveData<ApiResponse<List<MovieResponse>>>()
+        val resultPlayingMovieResponse = MutableLiveData<NetworkApiResponse<List<MovieResponse>>>()
 
         CoroutineScope(IO).launch {
             try {
 
                 val response = catalogApiService.getNowPlayingMovies().await()
-                resultMovieResponse.postValue(ApiResponse.success(response.result!!))
+                resultPlayingMovieResponse.postValue(NetworkApiResponse.success(response.result!!))
 
             } catch (e: IOException) {
 
                 e.printStackTrace()
 
-                resultMovieResponse.postValue(
+                resultPlayingMovieResponse.postValue(
 
-                    ApiResponse.error(
+                    NetworkApiResponse.error(
                         e.message.toString(),
                         mutableListOf()
                     )
@@ -44,28 +45,28 @@ class RemoteDataSource @Inject constructor(private val catalogApiService: ApiSer
 
         EspressoIdlingResource.decrement()
 
-        return resultMovieResponse
+        return resultPlayingMovieResponse
     }
 
-    fun getTvShowOnTheAir(): LiveData<ApiResponse<List<TvShowResponse>>> {
+    fun getTvShowOnTheAir(): LiveData<NetworkApiResponse<List<TvShowResponse>>> {
 
         EspressoIdlingResource.increment()
 
-        val resultTvShowResponse = MutableLiveData<ApiResponse<List<TvShowResponse>>>()
+        val resultOnAirTvShowResponse = MutableLiveData<NetworkApiResponse<List<TvShowResponse>>>()
 
         CoroutineScope(IO).launch {
             try {
 
                 val response = catalogApiService.getTvShowOnTheAir().await()
-                resultTvShowResponse.postValue(ApiResponse.success(response.result!!))
+                resultOnAirTvShowResponse.postValue(NetworkApiResponse.success(response.result!!))
 
             } catch (e: IOException) {
 
                 e.printStackTrace()
 
-                resultTvShowResponse.postValue(
+                resultOnAirTvShowResponse.postValue(
 
-                    ApiResponse.error(
+                    NetworkApiResponse.error(
                         e.message.toString(),
                         mutableListOf()
                     )
@@ -75,7 +76,7 @@ class RemoteDataSource @Inject constructor(private val catalogApiService: ApiSer
 
         EspressoIdlingResource.decrement()
 
-        return resultTvShowResponse
+        return resultOnAirTvShowResponse
     }
 
 }

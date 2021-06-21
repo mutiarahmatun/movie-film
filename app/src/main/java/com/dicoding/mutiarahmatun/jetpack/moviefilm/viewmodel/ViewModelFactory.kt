@@ -2,14 +2,14 @@ package com.dicoding.mutiarahmatun.jetpack.moviefilm.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.CatalogRepository
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.MovieFilmRepository
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.detail.DetailFilmViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.favorite.FavoriteViewModel
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.ui.home.HomeViewModel
 import javax.inject.Inject
 
 class ViewModelFactory @Inject constructor(
-        private val mCatalogRepository: CatalogRepository):
+        private val mCatalogRepository: MovieFilmRepository):
         ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")

@@ -4,35 +4,35 @@ import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.MovieEntity
 import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.entity.TvShowEntity
-import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.room.CatalogDao
+import com.dicoding.mutiarahmatun.jetpack.moviefilm.data.source.local.room.MovieFilmDao
 import javax.inject.Inject
 
-class LocalDataSource @Inject constructor(private val catalogDao: CatalogDao) {
+class LocalDataSource @Inject constructor(private val movieFilmDao: MovieFilmDao) {
 
-    fun getListMovies() : DataSource.Factory<Int, MovieEntity> = catalogDao.getListMovies()
+    fun getAllMovies() : DataSource.Factory<Int, MovieEntity> = movieFilmDao.getListMovies()
 
-    fun getListFavoriteMovies() : DataSource.Factory<Int, MovieEntity> = catalogDao.getListFavoriteMovies()
+    fun getAllFavoriteMovies() : DataSource.Factory<Int, MovieEntity> = movieFilmDao.getListFavoriteMovies()
 
-    fun getListTvShows() : DataSource.Factory<Int, TvShowEntity> = catalogDao.getListTvShows()
+    fun getDetailMovie(movieId: Int) : LiveData<MovieEntity> = movieFilmDao.getDetailMovieById(movieId)
 
-    fun getListFavoriteTvShows() : DataSource.Factory<Int, TvShowEntity> = catalogDao.getListFavoriteTvShows()
-
-    fun getDetailMovie(movieId: Int) : LiveData<MovieEntity> = catalogDao.getDetailMovieById(movieId)
-
-    fun getDetailTvShow(tvShowId: Int) : LiveData<TvShowEntity> = catalogDao.getDetailTvShowById(tvShowId)
-
-    fun insertMovies(movies: List<MovieEntity>) = catalogDao.insertMovies(movies)
-
-    fun insertTvShows(tvShows: List<TvShowEntity>) = catalogDao.insertTvShows(tvShows)
+    fun insertMovies(movies: List<MovieEntity>) = movieFilmDao.insertMovies(movies)
 
     fun setFavoriteMovie(movie : MovieEntity) {
         movie.isFavorite = !movie.isFavorite
-        catalogDao.updateMovie(movie)
+        movieFilmDao.updateMovie(movie)
     }
+
+    fun getAllTvShows() : DataSource.Factory<Int, TvShowEntity> = movieFilmDao.getListTvShows()
+
+    fun getAllFavoriteTvShows() : DataSource.Factory<Int, TvShowEntity> = movieFilmDao.getListFavoriteTvShows()
+
+    fun getDetailTvShow(tvShowId: Int) : LiveData<TvShowEntity> = movieFilmDao.getDetailTvShowById(tvShowId)
+
+    fun insertTvShows(tvShows: List<TvShowEntity>) = movieFilmDao.insertTvShows(tvShows)
 
     fun setFavoriteTvShow(tvShow : TvShowEntity) {
         tvShow.isFavorite = !tvShow.isFavorite
-        catalogDao.updateTvShow(tvShow)
+        movieFilmDao.updateTvShow(tvShow)
     }
 
 }
